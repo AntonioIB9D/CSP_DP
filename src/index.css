@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "./fonts/font.css";
+@import "@heroui/styles";
+
+body {
+  font-family:
+    "Outfit",
+    system-ui,
+    sans-serif,
+    system-ui,
+    -apple-system,
+    Roboto;
+  background-color: #000000;
+  color: #d5d3d3;
+}
