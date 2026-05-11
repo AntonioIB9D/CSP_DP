@@ -20,7 +20,7 @@ function App() {
       <section>
         <PressData />
       </section>
-      <section>
+      <section className="flex justify-evenly items-center min-h-screen">
         <DefectsReport />
       </section>
     </div>

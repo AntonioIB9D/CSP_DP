@@ -13,7 +13,7 @@ export default function RightPanel() {
         </div>
         <h1 className="text-2xl font-bold">
           What factory features does this <br />
-          box have?
+          product have?
         </h1>
         <div className="grid grid-cols-3 gap-4 mt-8">
           <FactoryOption factoryOptionName="Product Model" value="AK050" />

@@ -15,7 +15,7 @@ export default function SearchBox() {
   };
 
   return (
-    <div className="bg-[#141414] rounded-3xl pr-4 pl-4 pt-2 pb-2 flex flex-row justify-between items-center w-1/2 border-2 border-[#282828]">
+    <div className="bg-[#141414] opacity-95 rounded-3xl pr-4 pl-4 pt-2 pb-2 flex flex-row justify-between items-center w-1/2 border-2 border-[#282828]">
       <div className="flex items-center w-full">
         <i className="bi bi-qr-code-scan text-[#3A404A]"></i>
         <form
@@ -47,12 +47,18 @@ export default function SearchBox() {
               }}
             />
           </div>
-          <div className="w-full flex justify-end">
+          <div className="w-full flex justify-end gap-2">
             <Button
               className="h-8 flex justify-center items-center"
               type="submit"
             >
               Search <i className="bi bi-search"></i>
+            </Button>
+            <Button
+              className="h-8 flex justify-center items-center"
+              variant="danger-soft"
+            >
+              Report <i className="bi bi-download"></i>
             </Button>
           </div>
         </form>
