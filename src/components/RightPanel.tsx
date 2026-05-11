@@ -44,6 +44,11 @@ export default function RightPanel() {
             value="Grabill"
             icon="bi bi-box-seam"
           />
+          <FactoryOption
+            factoryOptionName="Shipping Tape"
+            value="8"
+            /* icon="bi bi-box-seam" */
+          />
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ export default function DefectsReport() {
         </div>
         <div>
           <img
-            src="/Product Models/LD AKA060 SA.png"
+            src="/Product Models/LD AKA060 SB.png"
             alt="Box sample"
             width={900}
             height={900}
