@@ -10,14 +10,14 @@ function App() {
   return (
     <div className="w-full justify-center items-center">
       <Header />
-      <section className=" sticky top-4 z-50 flex min-h-full w-full justify-center mt-12 -mb-16">
+      <section className="sticky top-4 z-50 flex min-h-full w-full justify-center mt-12 -mb-16">
         <SearchBox />
       </section>
       <section className="flex justify-evenly items-center min-h-screen">
         <LeftPanel />
         <RightPanel />
       </section>
-      <section>
+      <section className="flex flex-col justify-start min-h-screen text-center">
         <PressData />
       </section>
       <section className="flex justify-evenly items-center min-h-screen">
