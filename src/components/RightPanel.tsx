@@ -1,6 +1,76 @@
+import type { TagsData } from "../schemas/tagsPro.schema";
 import FactoryOption from "./FactoryOption";
 
-export default function RightPanel() {
+type RightPanelPros = {
+  tagsProData: TagsData | null | undefined;
+};
+
+export default function RightPanel({ tagsProData }: RightPanelPros) {
+  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+
+  // Option to product model
+  const productModel =
+    firstBoxStep?.parte === 10
+      ? "AK050"
+      : firstBoxStep?.parte === 11
+        ? "AK030"
+        : firstBoxStep?.parte === 12
+          ? "AK010"
+          : firstBoxStep?.parte === 20
+            ? "AK060"
+            : firstBoxStep?.parte === 21
+              ? "AK040"
+              : "AK020";
+
+  const boxType =
+    productModel === "AK010" ||
+    productModel === "AK030" ||
+    productModel === "AK050"
+      ? "Short Deck"
+      : "Long Deck";
+
+  const windowsZones =
+    productModel === "AK010"
+      ? "-"
+      : productModel === "AK020"
+        ? "-"
+        : productModel === "AK030"
+          ? "BL2, BL1"
+          : productModel === "AK040"
+            ? "BL2, BL1"
+            : productModel === "AK050"
+              ? "PO1, PO2, CP2, BL1, BL2"
+              : productModel === "AK060"
+                ? "PO1, PO2, CP2, BL1, BL2"
+                : "-";
+
+  const manufacturingDate = firstBoxStep?.time_stamp.split(" ") || "-";
+
+  const pressNumberCut = firstBoxStep?.tag.charAt(0) || "-";
+  const pressNumber =
+    pressNumberCut === "1"
+      ? "1"
+      : pressNumberCut === "2"
+        ? "2"
+        : pressNumberCut === "3"
+          ? "3"
+          : "4";
+
+  const shippingTape =
+    productModel === "AK010"
+      ? "8"
+      : productModel === "AK020"
+        ? "10"
+        : productModel === "AK030"
+          ? "8"
+          : productModel === "AK040"
+            ? "10"
+            : productModel === "AK050"
+              ? "8"
+              : productModel === "AK060"
+                ? "9"
+                : "-";
+
   return (
     <div className="flex justify-center">
       <div className="bg-[#121214] p-4 rounded-2xl w-full">
@@ -16,37 +86,40 @@ export default function RightPanel() {
           product have?
         </h1>
         <div className="grid grid-cols-3 gap-4 mt-8">
-          <FactoryOption factoryOptionName="Product Model" value="AK050" />
+          <FactoryOption
+            factoryOptionName="Product Model"
+            value={productModel}
+          />
           <FactoryOption
             factoryOptionName="Window Zones"
-            value="PO1, PO2"
+            value={windowsZones}
             icon="bi bi-fullscreen"
           />
-          <FactoryOption factoryOptionName="Box Type" value="Short Deck" />
+          <FactoryOption factoryOptionName="Box Type" value={boxType} />
           <FactoryOption
             factoryOptionName="Manufacturing date"
-            value="03/03/2026"
+            value={manufacturingDate[0]}
             icon="bi bi-calendar3"
           />
           <FactoryOption
             factoryOptionName="Festoon SMC"
-            value="0428602513"
+            value="-"
             icon="bi bi-upc-scan"
           />
           <FactoryOption
             factoryOptionName="Mold/Cavity"
-            value="2"
+            value="-"
             icon="bi bi-aspect-ratio"
           />
-          <FactoryOption factoryOptionName="Press" value="3" />
+          <FactoryOption factoryOptionName="Press" value={pressNumber} />
           <FactoryOption
             factoryOptionName="Festoon Supplier"
-            value="Grabill"
+            value="-"
             icon="bi bi-box-seam"
           />
           <FactoryOption
             factoryOptionName="Shipping Tape"
-            value="8"
+            value={shippingTape}
             /* icon="bi bi-box-seam" */
           />
         </div>

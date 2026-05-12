@@ -2,16 +2,18 @@ import { Button } from "@heroui/react";
 import { useForm } from "react-hook-form";
 
 type SearchBox = {
-  boxid: string;
+  boxId: string;
 };
 
-export default function SearchBox() {
+type searchBoxProps = {
+  onSearch: (boxId: string) => void;
+};
+
+export default function SearchBox({ onSearch }: searchBoxProps) {
   const { register, handleSubmit } = useForm<SearchBox>();
 
-  // Llamada al endpoint de busqueda con el boxid
-
   const onSubmit = (data: SearchBox) => {
-    console.log(data);
+    onSearch(data.boxId);
   };
 
   return (
@@ -25,15 +27,15 @@ export default function SearchBox() {
         >
           <div>
             <input
-              id="boxid"
+              id="boxId"
               className="w-full h-8 p-4 border border-[#141414] bg-[#141414] text-white focus:outline-none focus:border-[#141414] focus:ring-1 focus:ring-[#141414]"
               type="text"
               placeholder="4235185"
-              {...register("boxid", {
+              {...register("boxId", {
                 required: "Campo obligatorio",
                 maxLength: 7,
                 pattern: {
-                  value: /^[0-9]{7}$/, // exactamente 6 dígitos
+                  value: /^[0-9]{7}$/,
                   message: "Debe contener exactamente 7 dígitos",
                 },
               })}
