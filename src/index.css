@@ -14,7 +14,7 @@ body {
   color: #d5d3d3;
 }
 
-/* Chrome/Edge/Safari */
+/* Chrome/Edge/Safari ScrollBar obscuro */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -29,8 +29,22 @@ body {
   background-color: #666;
 }
 
-/* Firefox */
+/* Firefox ScrollBar obscuro */
 * {
   scrollbar-color: #444 #0a0c10;
   scrollbar-width: thin;
+}
+
+/* Chrome, Safari, Edge sugerencias de input no fuercen color blanco */
+input:-webkit-autofill {
+  background-color: #141414 !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  box-shadow: 0 0 0px 1000px #141414 inset !important;
+}
+
+/* Firefox sugerencias de input no fuercen color blanco */
+input:-moz-autofill {
+  background-color: #141414 !important;
+  color: white !important;
 }

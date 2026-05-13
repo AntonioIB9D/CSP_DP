@@ -8,19 +8,41 @@ type RightPanelPros = {
 export default function RightPanel({ tagsProData }: RightPanelPros) {
   const firstBoxStep = tagsProData ? tagsProData[0] : null;
 
+  const cavidad = firstBoxStep?.cavidad[0] || "-";
+
+  const ak050 =
+    firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");
+  const ak030 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK030");
+  const ak010 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK010");
+  const ak060 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK060");
+  const ak040 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK040");
+  const ak020 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK020");
+
   // Option to product model
   const productModel =
-    firstBoxStep?.parte === 10
+    firstBoxStep?.parte === 10 || ak050
       ? "AK050"
-      : firstBoxStep?.parte === 11
+      : firstBoxStep?.parte === 11 || ak030
         ? "AK030"
-        : firstBoxStep?.parte === 12
+        : firstBoxStep?.parte === 12 || ak010
           ? "AK010"
-          : firstBoxStep?.parte === 20
+          : firstBoxStep?.parte === 20 || ak060
             ? "AK060"
-            : firstBoxStep?.parte === 21
+            : firstBoxStep?.parte === 21 || ak040
               ? "AK040"
-              : "AK020";
+              : firstBoxStep?.parte === 22 || ak020
+                ? "AK020"
+                : "Not assigned";
 
   const boxType =
     productModel === "AK010" ||
@@ -108,7 +130,7 @@ export default function RightPanel({ tagsProData }: RightPanelPros) {
           />
           <FactoryOption
             factoryOptionName="Mold/Cavity"
-            value="-"
+            value={cavidad}
             icon="bi bi-aspect-ratio"
           />
           <FactoryOption factoryOptionName="Press" value={pressNumber} />
