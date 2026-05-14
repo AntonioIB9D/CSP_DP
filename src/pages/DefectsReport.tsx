@@ -1,4 +1,14 @@
-export default function DefectsReport() {
+import type { TagsData } from "../schemas/tagsPro.schema";
+
+type DefectsReportPros = {
+  tagsProData: TagsData | null | undefined;
+};
+
+export default function DefectsReport({ tagsProData }: DefectsReportPros) {
+  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+
+  console.log(firstBoxStep);
+
   return (
     <div className="text-center">
       <div className="mt-16">
@@ -11,19 +21,26 @@ export default function DefectsReport() {
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
               Defect
             </p>
-            <p className="text-2xl text-[#D57F43] font-bold">Fractura</p>
+            <p className="text-2xl text-[#D57F43] font-bold">
+              {firstBoxStep?.defecto}
+            </p>
           </div>
           <div className="flex flex-col gap-4 w-44 mr-16">
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
               Zone
             </p>
-            <p className="text-2xl text-[#D57F43] font-bold">M1</p>
+            <p className="text-2xl text-[#D57F43] font-bold">
+              {firstBoxStep?.zona}
+            </p>
           </div>
           <div className="flex flex-col gap-4 w-44 ml-12">
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
               Process
             </p>
-            <p className="text-2xl text-[#D57F43] font-bold">INSP. PINTURA</p>
+            <p className="text-2xl text-[#D57F43] font-bold">
+              {" "}
+              {firstBoxStep?.procesoDetectado}
+            </p>
           </div>
         </div>
         <div>
@@ -39,19 +56,23 @@ export default function DefectsReport() {
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
               Reworker
             </p>
-            <p className="text-2xl text-[#D57F43] font-bold">12345</p>
+            <p className="text-2xl text-[#D57F43] font-bold">-</p>
           </div>
           <div className="flex flex-col gap-4 w-44 ml-16">
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
               Quality Inspector
             </p>
-            <p className="text-2xl text-[#D57F43] font-bold">16518</p>
+            <p className="text-2xl text-[#D57F43] font-bold">
+              {firstBoxStep?.qcLibera}
+            </p>
           </div>
           <div className="flex flex-col gap-4 w-44 mr-12">
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
               Status
             </p>
-            <p className="text-2xl text-[#D57F43] font-bold">Sin liberar</p>
+            <p className="text-2xl text-[#D57F43] font-bold">
+              {firstBoxStep?.status}
+            </p>
           </div>
         </div>
       </div>
@@ -61,7 +82,7 @@ export default function DefectsReport() {
             Rework Start Time
           </p>
           <p className="text-2xl text-[#D57F43] font-bold">
-            15/03/2023 14:30 hrs
+            {firstBoxStep?.rwFechaRecibe}
           </p>
         </div>
       </div>

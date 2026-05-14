@@ -66,7 +66,12 @@ export default function LeftPanel({ tagsProData }: LeftPanelPros) {
         ) : (
           <div className="flex flex-col gap-4 justify-center items-center">
             <p>Sorry, we do not have information about this product</p>
-            <img src="/Product Models/dog-svgrepo-com.svg" alt="MDN" />
+            <img
+              src="/Product Models/dog-svgrepo-com.svg"
+              alt="MDN"
+              width={100}
+              height={100}
+            />
           </div>
         )}
       </div>

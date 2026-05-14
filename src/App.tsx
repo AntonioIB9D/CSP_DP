@@ -20,12 +20,48 @@ function App() {
     enabled: !!boxId, // Solo ejecutar la consulta si boxId no es vacío
   });
 
-  console.log(tagsProData);
+  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+
+  const ak050 =
+    firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");
+  const ak030 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK030");
+  const ak010 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK010");
+  const ak060 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK060");
+  const ak040 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK040");
+  const ak020 =
+    firstBoxStep?.product[0] !== undefined &&
+    firstBoxStep?.product[0].includes("AK020");
+
+  // Option to product model
+  const productModel =
+    firstBoxStep?.parte === 10 || ak050
+      ? "AK050"
+      : firstBoxStep?.parte === 11 || ak030
+        ? "AK030"
+        : firstBoxStep?.parte === 12 || ak010
+          ? "AK010"
+          : firstBoxStep?.parte === 20 || ak060
+            ? "AK060"
+            : firstBoxStep?.parte === 21 || ak040
+              ? "AK040"
+              : firstBoxStep?.parte === 22 || ak020
+                ? "AK020"
+                : "Not assigned";
 
   return (
     <div className="w-full justify-center items-center">
-      <Header />
-      <section className="sticky top-4 z-50 flex min-h-full w-full justify-center mt-12 -mb-20">
+      {/* <Header /> */}
+      <section
+        className={`${productModel !== "Not assigned" ? "mt-12" : "mt-6"} flex min-h-full w-full justify-center -mb-20`}
+      >
         <SearchBox onSearch={setBoxId} />
       </section>
       {tagsProData && tagsProData.length > 0 ? (
@@ -34,16 +70,21 @@ function App() {
             <LeftPanel tagsProData={tagsProData} />
             <RightPanel tagsProData={tagsProData} />
           </section>
-          <section className="flex flex-col justify-start min-h-screen text-center">
-            <PressData />
-          </section>
-          <section className="flex justify-evenly items-center min-h-screen">
-            <DefectsReport />
-          </section>
+
+          {productModel !== "Not assigned" && (
+            <section className="flex flex-col justify-start min-h-screen text-center">
+              <PressData />
+            </section>
+          )}
+          {productModel !== "Not assigned" && (
+            <section className="flex justify-evenly items-center min-h-screen">
+              <DefectsReport tagsProData={tagsProData} />
+            </section>
+          )}
         </>
       ) : (
         <>
-          <div className="flex flex-col gap-4 justify-center items-center mt-30 h-full">
+          <div className="flex flex-col gap-4 justify-center items-center mt-38 h-full">
             <h1 className="text-4xl font-bold">
               Welcome to <span className="text-[#D22D25]">CSP</span> Product{" "}
               <span className="text-[#009DFE]">Details</span>

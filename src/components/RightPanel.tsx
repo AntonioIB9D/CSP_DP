@@ -49,7 +49,11 @@ export default function RightPanel({ tagsProData }: RightPanelPros) {
     productModel === "AK030" ||
     productModel === "AK050"
       ? "Short Deck"
-      : "Long Deck";
+      : productModel === "AK020" ||
+          productModel === "AK040" ||
+          productModel === "AK060"
+        ? "Long Deck"
+        : "-";
 
   const windowsZones =
     productModel === "AK010"
