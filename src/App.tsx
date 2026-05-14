@@ -8,6 +8,7 @@ import DefectsReport from "./pages/DefectsReport";
 import PressData from "./pages/PressData";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTagsProData } from "./services/TagsProService";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 function App() {
   const [boxId, setBoxId] = useState<string>("");
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="w-full justify-center items-center">
       <Header />
-      <section className="sticky top-4 z-50 flex min-h-full w-full justify-center mt-12 -mb-16">
+      <section className="sticky top-4 z-50 flex min-h-full w-full justify-center mt-12 -mb-20">
         <SearchBox onSearch={setBoxId} />
       </section>
       {tagsProData && tagsProData.length > 0 ? (
@@ -41,7 +42,47 @@ function App() {
           </section>
         </>
       ) : (
-        <>{console.log("Entre aqui")}</>
+        <>
+          <div className="flex flex-col gap-4 justify-center items-center mt-30 h-full">
+            <h1 className="text-4xl font-bold">
+              Welcome to <span className="text-[#D22D25]">CSP</span> Product{" "}
+              <span className="text-[#009DFE]">Details</span>
+            </h1>
+            <p className="text-[#778A96]">
+              Try searching a box ID to get the product information
+            </p>
+
+            <DotLottieReact
+              src="/Global Network.json"
+              autoplay
+              loop
+              className="-mt-28 w-175 h-175"
+            />
+            <div className="w-full flex flex-col justify-center items-center gap-4 -mt-28">
+              <div className="w-full">1</div>
+              <div className="flex justify-evenly items-center w-full">
+                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#171717] border border-[#262626] rounded-xl">
+                  <p className="text-[#D5D3D3] font-bold">Factory Info.</p>
+                  <p className="text-[#949A9C]">
+                    Get the factory details <br /> of the product
+                  </p>
+                </div>
+                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#171717] border border-[#262626] rounded-xl">
+                  <p className="text-[#D5D3D3] font-bold">Product Defect</p>
+                  <p className="text-[#949A9C]">
+                    Get the defect <br /> associated to that product
+                  </p>
+                </div>
+                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#171717] border border-[#262626] rounded-xl">
+                  <p className="text-[#D5D3D3] font-bold">Time Line</p>
+                  <p className="text-[#949A9C]">
+                    Get the time line of this <br /> product in the process{" "}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
