@@ -9,6 +9,7 @@ import PressData from "./pages/PressData";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTagsProData } from "./services/TagsProService";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import ProcessRegister from "./pages/ProcessRegister";
 
 function App() {
   const [boxId, setBoxId] = useState<string>("");
@@ -74,6 +75,11 @@ function App() {
           {productModel !== "Not assigned" && (
             <section className="flex flex-col justify-start min-h-screen text-center">
               <PressData />
+            </section>
+          )}
+          {productModel !== "Not assigned" && (
+            <section className="flex justify-evenly items-center min-h-screen">
+              <ProcessRegister />
             </section>
           )}
           {productModel !== "Not assigned" && (

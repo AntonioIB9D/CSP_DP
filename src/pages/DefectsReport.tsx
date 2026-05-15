@@ -58,8 +58,6 @@ export default function DefectsReport({
     return null;
   }
 
-  console.log(foundIn?.[0]);
-
   const boxImage =
     foundIn?.[0] === "ldSideA"
       ? "LD Side A"
@@ -87,7 +85,7 @@ export default function DefectsReport({
         <h1 className="text-2xl font-bold text-[#FF791B]">Defects Report</h1>
         <h1 className="text-4xl font-bold">Product Defects at your disposal</h1>
       </div>
-      <div className="flex justify-evenly items-center gap-4 -mt-24">
+      <div className="flex justify-evenly items-center gap-12 -mt-24">
         <div className="flex flex-col justify-evenly min-h-screen">
           <div className="flex flex-col gap-4 w-44 ml-12">
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
@@ -117,17 +115,19 @@ export default function DefectsReport({
           <img
             src={`/Product Models/${boxImage}.png`}
             alt="Box sample"
-            width={900}
-            height={900}
+            width={800}
+            height={800}
           />
         </div>
-        <div className="flex flex-col justify-evenly min-h-screen">
+        <div className="flex flex-col justify-evenly min-h-screen ">
           <div className="flex flex-col gap-4 w-44 mr-12">
             <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
               Quality Release Date
             </p>
             <p className="text-2xl text-[#D57F43] font-bold">
-              {firstBoxStep?.qcFechaLibera}
+              {firstBoxStep?.qcFechaLibera[0] !== null
+                ? firstBoxStep?.qcFechaLibera[0]
+                : "NO DATA"}
             </p>
           </div>
           <div className="flex flex-col gap-4 w-44 ml-16">
@@ -135,7 +135,9 @@ export default function DefectsReport({
               Quality Inspector
             </p>
             <p className="text-2xl text-[#D57F43] font-bold">
-              {firstBoxStep?.qcLibera}
+              {firstBoxStep?.qcLibera[0] !== null
+                ? firstBoxStep?.qcLibera[0]
+                : "NO DATA"}
             </p>
           </div>
           <div className="flex flex-col gap-4 w-44 mr-12">
@@ -154,7 +156,9 @@ export default function DefectsReport({
             Rework Start Time
           </p>
           <p className="text-2xl text-[#D57F43] font-bold">
-            {firstBoxStep?.rwFechaRecibe}
+            {firstBoxStep?.rwFechaRecibe[0] !== null
+              ? firstBoxStep?.rwFechaRecibe[0]
+              : "NO DATA"}
           </p>
         </div>
         <div className="flex flex-col gap-4 w-56">
@@ -162,7 +166,9 @@ export default function DefectsReport({
             Rework End Time
           </p>
           <p className="text-2xl text-[#D57F43] font-bold">
-            {firstBoxStep?.rwFechaLibera}
+            {firstBoxStep?.rwFechaLibera[0] !== null
+              ? firstBoxStep?.rwFechaLibera[0]
+              : "NO DATA"}
           </p>
         </div>
       </div>
