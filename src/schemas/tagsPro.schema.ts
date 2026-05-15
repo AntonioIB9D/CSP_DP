@@ -13,8 +13,10 @@ const TagSchema = z.object({
   zona: z.array(z.string()),
   procesoDetectado: z.array(z.string()),
   status: z.array(z.string()),
-  qcLibera: z.array(z.string().nullable()),
   rwFechaRecibe: z.array(z.string().nullable()),
+  rwFechaLibera: z.array(z.string().nullable()),
+  qcFechaLibera: z.array(z.string().nullable()),
+  qcLibera: z.array(z.string().nullable()),
 });
 
 export const TagsResponseSchema = z.array(TagSchema);

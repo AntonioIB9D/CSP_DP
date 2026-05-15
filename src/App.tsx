@@ -60,7 +60,7 @@ function App() {
     <div className="w-full justify-center items-center">
       {/* <Header /> */}
       <section
-        className={`${productModel !== "Not assigned" ? "mt-12" : "mt-6"} flex min-h-full w-full justify-center -mb-20`}
+        className={`${productModel !== "Not assigned" ? "mt-12" : "mt-6"} flex min-h-full w-full justify-center -mb-20 sticky top-6 z-50`}
       >
         <SearchBox onSearch={setBoxId} />
       </section>
@@ -78,7 +78,10 @@ function App() {
           )}
           {productModel !== "Not assigned" && (
             <section className="flex justify-evenly items-center min-h-screen">
-              <DefectsReport tagsProData={tagsProData} />
+              <DefectsReport
+                tagsProData={tagsProData}
+                productModel={productModel}
+              />
             </section>
           )}
         </>
