@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import Header from "./components/Header";
 import LeftPanel from "./components/LeftPanel";
 import RightPanel from "./components/RightPanel";
 import SearchBox from "./components/SearchBox";
@@ -22,6 +21,8 @@ function App() {
   });
 
   const firstBoxStep = tagsProData ? tagsProData[0] : null;
+
+  console.log("tagsProData: ", tagsProData);
 
   const ak050 =
     firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");
