@@ -9,12 +9,19 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchTagsProData } from "./services/TagsProService";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import ProcessRegister from "./pages/ProcessRegister";
+import { Spinner } from "@heroui/react";
+import { motion } from "framer-motion";
 
 function App() {
   const [boxId, setBoxId] = useState<string>("");
 
   // Si hay un BoxId podemos hacer la consulta a la API y mostrar los datos en los componentes correspondientes
-  const { data: tagsProData } = useQuery({
+  const {
+    data: tagsProData,
+    isLoading,
+    isFetching,
+    error,
+  } = useQuery({
     queryKey: ["tagsProData", boxId],
     queryFn: () => fetchTagsProData(Number(boxId)),
     enabled: !!boxId, // Solo ejecutar la consulta si boxId no es vacío
@@ -56,6 +63,21 @@ function App() {
                 ? "AK020"
                 : "Not assigned";
 
+  if (isLoading || isFetching) {
+    return (
+      <div className="flex flex-col items-center gap-2 min-h-screen justify-center">
+        <Spinner color="accent" />
+        <span className="text-muted">Loading data, please wait ...</span>
+      </div>
+    );
+  }
+
+  /*  if (error) {
+    return toast.error(
+      "Error fetching data for the selected press. Please try again.",
+    );
+  } */
+
   return (
     <div className="w-full justify-center items-center">
       {/* <Header /> */}
@@ -67,8 +89,23 @@ function App() {
       {tagsProData && tagsProData.length > 0 ? (
         <>
           <section className="flex justify-evenly items-center min-h-screen">
-            <LeftPanel tagsProData={tagsProData} />
-            <RightPanel tagsProData={tagsProData} />
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <LeftPanel tagsProData={tagsProData} />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <RightPanel tagsProData={tagsProData} />
+            </motion.div>
           </section>
 
           {productModel !== "Not assigned" && (
@@ -78,7 +115,7 @@ function App() {
           )}
           {productModel !== "Not assigned" && (
             <section className="flex justify-evenly items-center min-h-screen">
-              <ProcessRegister tagsProData={tagsProData}/>
+              <ProcessRegister tagsProData={tagsProData} />
             </section>
           )}
           {productModel !== "Not assigned" && (

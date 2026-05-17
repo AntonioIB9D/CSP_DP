@@ -18,7 +18,7 @@ export default function SearchBox({ onSearch }: searchBoxProps) {
 
   return (
     <div className="bg-[#141414] opacity-95 rounded-3xl pr-4 pl-4 pt-2 pb-2 flex flex-row justify-between items-center w-1/2 border-2 border-[#282828]">
-      <div className="flex items-center w-full">
+      <div className="flex items-center w-full gap-1">
         <i className="bi bi-qr-code-scan text-[#3A404A]"></i>
         <form
           noValidate

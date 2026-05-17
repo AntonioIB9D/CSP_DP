@@ -9,6 +9,7 @@ import {
   sdSideD,
 } from "../data/boxesZones";
 import type { TagsData } from "../schemas/tagsPro.schema";
+import { motion } from "framer-motion";
 
 type DefectsReportPros = {
   tagsProData: TagsData | null | undefined;
@@ -20,6 +21,22 @@ type DefectsReportPros = {
     | "AK040"
     | "AK020"
     | "Not assigned";
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 1, // espera 1 segundo antes de empezar
+      staggerChildren: 2, // cada hijo aparece con 2 segundos de diferencia
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
 export default function DefectsReport({
@@ -82,96 +99,142 @@ export default function DefectsReport({
   return (
     <div className="text-center">
       <div className="mt-16">
-        <h1 className="text-2xl font-bold text-[#FF791B]">Defects Report</h1>
-        <h1 className="text-4xl font-bold">Product Defects at your disposal</h1>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h1 className="text-2xl font-bold text-[#FF791B]">Defects Report</h1>
+          <h1 className="text-4xl font-bold">
+            Product Defects at your disposal
+          </h1>
+        </motion.div>
       </div>
-      <div className="flex justify-evenly items-center gap-12 -mt-24">
-        <div className="flex flex-col justify-evenly min-h-screen">
-          <div className="flex flex-col gap-4 w-44 ml-12">
-            <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-              Defect
-            </p>
-            <p className="text-2xl text-[#D57F43] font-bold">
-              {firstBoxStep?.defecto}
-            </p>
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <div className="flex justify-evenly items-center gap-12 -mt-24">
+          <div className="flex flex-col justify-evenly min-h-screen">
+            <motion.div variants={itemVariants}>
+              <div className="flex flex-col gap-4 w-44 ml-12">
+                <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                  Defect
+                </p>
+                <p className="text-2xl text-[#D57F43] font-bold">
+                  {firstBoxStep?.defecto}
+                </p>
+              </div>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="flex flex-col gap-4 w-44 mr-16">
+                <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                  Zone
+                </p>
+                <p className="text-2xl text-[#D57F43] font-bold">{zone}</p>
+              </div>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="flex flex-col gap-4 w-44 ml-12">
+                <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                  Process
+                </p>
+                <p className="text-2xl text-[#D57F43] font-bold">
+                  {" "}
+                  {firstBoxStep?.procesoDetectado}
+                </p>
+              </div>
+            </motion.div>
           </div>
-          <div className="flex flex-col gap-4 w-44 mr-16">
-            <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-              Zone
-            </p>
-            <p className="text-2xl text-[#D57F43] font-bold">{zone}</p>
-          </div>
-          <div className="flex flex-col gap-4 w-44 ml-12">
-            <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-              Process
-            </p>
-            <p className="text-2xl text-[#D57F43] font-bold">
-              {" "}
-              {firstBoxStep?.procesoDetectado}
-            </p>
+          <motion.div variants={itemVariants}>
+            <div>
+              {boxImage ? (
+                <img
+                  src={`/Product Models/${boxImage}.png`}
+                  alt="Box sample"
+                  width={800}
+                  height={800}
+                />
+              ) : (
+                <div className="w-200 h-200 flex flex-col justify-center items-center">
+                  <p className="text-[#FF791B] text-2xl">
+                    Product image not available
+                  </p>
+                  <p className="text-[#86868B]">
+                    Zone can not be found in the product
+                  </p>
+                </div>
+              )}
+            </div>
+          </motion.div>
+          <div className="flex flex-col justify-evenly min-h-screen ">
+            <motion.div variants={itemVariants}>
+              <div className="flex flex-col gap-4 w-44 mr-12">
+                <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                  Quality Release Date
+                </p>
+                <p className="text-2xl text-[#D57F43] font-bold">
+                  {firstBoxStep?.qcFechaLibera[0] !== null
+                    ? firstBoxStep?.qcFechaLibera[0]
+                    : "NO DATA"}
+                </p>
+              </div>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="flex flex-col gap-4 w-44 ml-16">
+                <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                  Quality Inspector
+                </p>
+                <p className="text-2xl text-[#D57F43] font-bold">
+                  {firstBoxStep?.qcLibera[0] !== null
+                    ? firstBoxStep?.qcLibera[0]
+                    : "NO DATA"}
+                </p>
+              </div>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="flex flex-col gap-4 w-44 mr-12">
+                <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                  Status
+                </p>
+                <p className="text-2xl text-[#D57F43] font-bold">
+                  {firstBoxStep?.status}
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
-        <div>
-          <img
-            src={`/Product Models/${boxImage}.png`}
-            alt="Box sample"
-            width={800}
-            height={800}
-          />
+        <div className="w-full flex justify-evenly -mt-40">
+          <motion.div variants={itemVariants}>
+            <div className="flex flex-col gap-4 w-56">
+              <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                Rework Start Time
+              </p>
+              <p className="text-2xl text-[#D57F43] font-bold">
+                {firstBoxStep?.rwFechaRecibe[0] !== null
+                  ? firstBoxStep?.rwFechaRecibe[0]
+                  : "NO DATA"}
+              </p>
+            </div>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <div className="flex flex-col gap-4 w-56">
+              <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
+                Rework End Time
+              </p>
+              <p className="text-2xl text-[#D57F43] font-bold">
+                {firstBoxStep?.rwFechaLibera[0] !== null
+                  ? firstBoxStep?.rwFechaLibera[0]
+                  : "NO DATA"}
+              </p>
+            </div>
+          </motion.div>
         </div>
-        <div className="flex flex-col justify-evenly min-h-screen ">
-          <div className="flex flex-col gap-4 w-44 mr-12">
-            <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-              Quality Release Date
-            </p>
-            <p className="text-2xl text-[#D57F43] font-bold">
-              {firstBoxStep?.qcFechaLibera[0] !== null
-                ? firstBoxStep?.qcFechaLibera[0]
-                : "NO DATA"}
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 w-44 ml-16">
-            <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-              Quality Inspector
-            </p>
-            <p className="text-2xl text-[#D57F43] font-bold">
-              {firstBoxStep?.qcLibera[0] !== null
-                ? firstBoxStep?.qcLibera[0]
-                : "NO DATA"}
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 w-44 mr-12">
-            <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-              Status
-            </p>
-            <p className="text-2xl text-[#D57F43] font-bold">
-              {firstBoxStep?.status}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="w-full flex justify-evenly -mt-40">
-        <div className="flex flex-col gap-4 w-56">
-          <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-            Rework Start Time
-          </p>
-          <p className="text-2xl text-[#D57F43] font-bold">
-            {firstBoxStep?.rwFechaRecibe[0] !== null
-              ? firstBoxStep?.rwFechaRecibe[0]
-              : "NO DATA"}
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 w-56">
-          <p className="text-left border-b border-[#3A404A] text-[#86868B] text-sm font-bold pb-2">
-            Rework End Time
-          </p>
-          <p className="text-2xl text-[#D57F43] font-bold">
-            {firstBoxStep?.rwFechaLibera[0] !== null
-              ? firstBoxStep?.rwFechaLibera[0]
-              : "NO DATA"}
-          </p>
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

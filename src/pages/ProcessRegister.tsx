@@ -1,7 +1,24 @@
 import type { TagsData } from "../schemas/tagsPro.schema";
+import { motion } from "framer-motion";
 
 type ProcessRegisterPros = {
   tagsProData: TagsData | null | undefined;
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 1, // espera 1 segundo antes de empezar
+      staggerChildren: 2, // cada hijo aparece con 2 segundos de diferencia
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
 export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
@@ -17,16 +34,32 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
   return (
     <div className="text-center">
       <div className="mt-28">
-        <h1 className="text-2xl font-bold text-[#FF791B]">
-          Process Registration
-        </h1>
-        <h1 className="text-4xl font-bold">
-          Recording of product hours in the process
-        </h1>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h1 className="text-2xl font-bold text-[#FF791B]">
+            Process Registration
+          </h1>
+          <h1 className="text-4xl font-bold">
+            Recording of product hours in the process
+          </h1>
+        </motion.div>
       </div>
       <div className="flex justify-evenly items-center gap-12 min-h-screen">
-        <div className="flex justify-center gap-8 overflow-x-auto max-w-400">
-          <div className="flex flex-col gap-4 w-125">
+        <motion.div
+          className="flex justify-center gap-8 overflow-x-auto max-w-400 overflow-y-hidden py-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.div
+            className="flex flex-col gap-4 w-125"
+            variants={itemVariants}
+          >
             <div className="p-4 bg-[#121214] rounded-2xl flex flex-col gap-16">
               <div className="flex justify-between">
                 <div className="text-sm text-[#0068ED] bg-[#171E2D] rounded-2xl pr-2 pl-2 pt-1 pb-1 font-bold">
@@ -73,16 +106,20 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 Product register at the process 1 control point. <b>Date</b>:{" "}
                 {processOneData?.time_stamp.split(" ")[0]
                   ? processOneData.time_stamp.split(" ")[0]
-                  : "--/--/----"}
+                  : "Not Registered"}
                 , <b>Time</b>:{" "}
                 {processOneData?.time_stamp.split(" ")[1]
                   ? processOneData.time_stamp.split(" ")[1]
-                  : "--:--"}
+                  : "Not Registered"}
                 .
               </span>
             </span>
-          </div>
-          <div className="flex flex-col gap-4 w-125">
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-4 w-125"
+            variants={itemVariants}
+          >
             <div className="p-4 bg-[#121214] rounded-2xl flex flex-col gap-16">
               <div className="flex justify-between">
                 <div className="text-sm text-[#13CB6C] bg-[#171E2D] rounded-2xl pr-2 pl-2 pt-1 pb-1 font-bold">
@@ -136,8 +173,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 .
               </span>
             </span>
-          </div>
-          <div className="flex flex-col gap-4 w-125">
+          </motion.div>
+          <motion.div
+            className="flex flex-col gap-4 w-125"
+            variants={itemVariants}
+          >
             <div className="p-4 bg-[#121214] rounded-2xl flex flex-col gap-16">
               <div className="flex justify-between">
                 <div className="text-sm text-[#FF6A32] bg-[#171E2D] rounded-2xl pr-2 pl-2 pt-1 pb-1 font-bold">
@@ -191,8 +231,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 .
               </span>
             </span>
-          </div>
-          <div className="flex flex-col gap-4 w-125">
+          </motion.div>
+          <motion.div
+            className="flex flex-col gap-4 w-125"
+            variants={itemVariants}
+          >
             <div className="p-4 bg-[#121214] rounded-2xl flex flex-col gap-16">
               <div className="flex justify-between">
                 <div className="text-sm text-[#D70B60] bg-[#171E2D] rounded-2xl pr-2 pl-2 pt-1 pb-1 font-bold">
@@ -246,8 +289,12 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 .
               </span>
             </span>
-          </div>
-          <div className="flex flex-col gap-4 w-125">
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-4 w-125"
+            variants={itemVariants}
+          >
             <div className="p-4 bg-[#121214] rounded-2xl flex flex-col gap-16">
               <div className="flex justify-between">
                 <div className="text-sm text-[#43A6FD] bg-[#171E2D] rounded-2xl pr-2 pl-2 pt-1 pb-1 font-bold">
@@ -301,8 +348,12 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 .
               </span>
             </span>
-          </div>
-          <div className="flex flex-col gap-4 w-125">
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-4 w-125"
+            variants={itemVariants}
+          >
             <div className="p-4 bg-[#121214] rounded-2xl flex flex-col gap-16">
               <div className="flex justify-between">
                 <div className="text-sm text-[#778A96] bg-[#171E2D] rounded-2xl pr-2 pl-2 pt-1 pb-1 font-bold">
@@ -356,8 +407,8 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 .
               </span>
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
