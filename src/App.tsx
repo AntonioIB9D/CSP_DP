@@ -22,8 +22,6 @@ function App() {
 
   const firstBoxStep = tagsProData ? tagsProData[0] : null;
 
-  console.log("tagsProData: ", tagsProData);
-
   const ak050 =
     firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");
   const ak030 =
@@ -80,7 +78,7 @@ function App() {
           )}
           {productModel !== "Not assigned" && (
             <section className="flex justify-evenly items-center min-h-screen">
-              <ProcessRegister />
+              <ProcessRegister tagsProData={tagsProData}/>
             </section>
           )}
           {productModel !== "Not assigned" && (

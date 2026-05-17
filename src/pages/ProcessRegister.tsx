@@ -7,9 +7,12 @@ type ProcessRegisterPros = {
 export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
   const firstBoxStep = tagsProData ? tagsProData : null;
 
-  const processOneData = firstBoxStep?.map((step) => step.proceso === 1);
-
-  console.log("processOneData: ", processOneData);
+  const processOneData = firstBoxStep?.find((step) => step.proceso === 1);
+  const processTwoData = firstBoxStep?.find((step) => step.proceso === 2);
+  const processThreeData = firstBoxStep?.find((step) => step.proceso === 3);
+  const processFourData = firstBoxStep?.find((step) => step.proceso === 4);
+  const processFiveData = firstBoxStep?.find((step) => step.proceso === 5);
+  const processSixData = firstBoxStep?.find((step) => step.proceso === 6);
 
   return (
     <div className="text-center">
@@ -32,7 +35,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
 
                 <div className="text-sm flex justify-center items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#0068ED]"></div>
-                  <div className="text-[#778A96]">Registered</div>
+                  <div className="text-[#778A96]">
+                    {processOneData?.time_stamp.split(" ")[0]
+                      ? "Registered"
+                      : "Not Registered"}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-4">
@@ -43,20 +50,35 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 <div className="flex justify-center items-center gap-2">
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-calendar-minus text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">16/5/2026</p>
+                    <p className="text-[#778A96]">
+                      {processOneData?.time_stamp.split(" ")[0]
+                        ? processOneData.time_stamp.split(" ")[0]
+                        : "--/--/----"}
+                    </p>
                   </div>
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-clock text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">08:15 A.M.</p>
+                    <p className="text-[#778A96]">
+                      {processOneData?.time_stamp.split(" ")[1]
+                        ? processOneData.time_stamp.split(" ")[1]
+                        : "--:--"}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <span>
-              <span className="text-[#D5D3D3] font-bold">Drill Entrance. </span>
+              <span className="text-[#FF791B] font-bold">Drill Entrance. </span>
               <span className="text-[#778A96] whitespace-normal">
-                Registro del producto en el punto de control del proceso 1.
-                Fecha: 16 May 2026, Hora: 08:15 AM.
+                Product register at the process 1 control point. <b>Date</b>:{" "}
+                {processOneData?.time_stamp.split(" ")[0]
+                  ? processOneData.time_stamp.split(" ")[0]
+                  : "--/--/----"}
+                , <b>Time</b>:{" "}
+                {processOneData?.time_stamp.split(" ")[1]
+                  ? processOneData.time_stamp.split(" ")[1]
+                  : "--:--"}
+                .
               </span>
             </span>
           </div>
@@ -68,7 +90,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 </div>
                 <div className="text-sm flex justify-center items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#13CB6C]"></div>
-                  <div className="text-[#778A96]">Registered</div>
+                  <div className="text-[#778A96]">
+                    {processTwoData?.time_stamp.split(" ")[0]
+                      ? "Registered"
+                      : "Not Registered"}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-4">
@@ -79,20 +105,35 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 <div className="flex justify-center items-center gap-2">
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-calendar-minus text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">16/5/2026</p>
+                    <p className="text-[#778A96]">
+                      {processTwoData?.time_stamp.split(" ")[0]
+                        ? processTwoData.time_stamp.split(" ")[0]
+                        : "--/--/----"}
+                    </p>
                   </div>
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-clock text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">08:15 A.M.</p>
+                    <p className="text-[#778A96]">
+                      {processTwoData?.time_stamp.split(" ")[1]
+                        ? processTwoData.time_stamp.split(" ")[1]
+                        : "--:--"}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <span>
-              <span className="text-[#D5D3D3] font-bold">Drill Exit. </span>
+              <span className="text-[#FF791B] font-bold">Drill Exit. </span>
               <span className="text-[#778A96] whitespace-normal">
-                Registro del producto en el punto de control del proceso 2.
-                Fecha: 16 May 2026, Hora: 08:25 AM.
+                Product register at the process 2 control point. <b>Date</b>:{" "}
+                {processTwoData?.time_stamp.split(" ")[0]
+                  ? processTwoData.time_stamp.split(" ")[0]
+                  : "Not registered"}
+                , <b>Time</b>:{" "}
+                {processTwoData?.time_stamp.split(" ")[1]
+                  ? processTwoData.time_stamp.split(" ")[1]
+                  : "Not registered"}
+                .
               </span>
             </span>
           </div>
@@ -104,7 +145,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 </div>
                 <div className="text-sm flex justify-center items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#FF6A32]"></div>
-                  <div className="text-[#778A96]">Registered</div>
+                  <div className="text-[#778A96]">
+                    {processThreeData?.time_stamp.split(" ")[0]
+                      ? "Registered"
+                      : "Not Registered"}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-4">
@@ -115,20 +160,35 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 <div className="flex justify-center items-center gap-2">
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-calendar-minus text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">16/5/2026</p>
+                    <p className="text-[#778A96]">
+                      {processThreeData?.time_stamp.split(" ")[0]
+                        ? processThreeData.time_stamp.split(" ")[0]
+                        : "--/--/----"}
+                    </p>
                   </div>
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-clock text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">08:15 A.M.</p>
+                    <p className="text-[#778A96]">
+                      {processThreeData?.time_stamp.split(" ")[1]
+                        ? processThreeData.time_stamp.split(" ")[1]
+                        : "--:--"}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <span>
-              <span className="text-[#D5D3D3] font-bold">Paint Entrance. </span>
+              <span className="text-[#FF791B] font-bold">Paint Entrance. </span>
               <span className="text-[#778A96] whitespace-normal">
-                Registro del producto en el punto de control del proceso 3.
-                Fecha: 16 May 2026, Hora: 08:30 AM.
+                Product register at the process 3 control point. <b>Date</b>:{" "}
+                {processThreeData?.time_stamp.split(" ")[0]
+                  ? processThreeData.time_stamp.split(" ")[0]
+                  : "Not registered"}
+                , <b>Time</b>:{" "}
+                {processThreeData?.time_stamp.split(" ")[1]
+                  ? processThreeData.time_stamp.split(" ")[1]
+                  : "Not registered"}
+                .
               </span>
             </span>
           </div>
@@ -140,7 +200,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 </div>
                 <div className="text-sm flex justify-center items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#D70B60]"></div>
-                  <div className="text-[#778A96]">Registered</div>
+                  <div className="text-[#778A96]">
+                    {processFourData?.time_stamp.split(" ")[0]
+                      ? "Registered"
+                      : "Not Registered"}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-4">
@@ -151,20 +215,35 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 <div className="flex justify-center items-center gap-2">
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-calendar-minus text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">16/5/2026</p>
+                    <p className="text-[#778A96]">
+                      {processFourData?.time_stamp.split(" ")[0]
+                        ? processFourData.time_stamp.split(" ")[0]
+                        : "--/--/----"}
+                    </p>
                   </div>
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-clock text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">08:15 A.M.</p>
+                    <p className="text-[#778A96]">
+                      {processFourData?.time_stamp.split(" ")[1]
+                        ? processFourData.time_stamp.split(" ")[1]
+                        : "--:--"}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <span>
-              <span className="text-[#D5D3D3] font-bold">Paint Exit. </span>
+              <span className="text-[#FF791B] font-bold">Paint Exit. </span>
               <span className="text-[#778A96] whitespace-normal">
-                Registro del producto en el punto de control del proceso 4.
-                Fecha: 16 May 2026, Hora: 10:20 AM.
+                Product register at the process 4 control point. <b>Date</b>:{" "}
+                {processFourData?.time_stamp.split(" ")[0]
+                  ? processFourData.time_stamp.split(" ")[0]
+                  : "Not registered"}
+                , <b>Time</b>:{" "}
+                {processFourData?.time_stamp.split(" ")[1]
+                  ? processFourData.time_stamp.split(" ")[1]
+                  : "Not registered"}
+                .
               </span>
             </span>
           </div>
@@ -176,7 +255,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 </div>
                 <div className="text-sm flex justify-center items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#43A6FD]"></div>
-                  <div className="text-[#778A96]">Registered</div>
+                  <div className="text-[#778A96]">
+                    {processFiveData?.time_stamp.split(" ")[0]
+                      ? "Registered"
+                      : "Not Registered"}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-4">
@@ -187,20 +270,35 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 <div className="flex justify-center items-center gap-2">
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-calendar-minus text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">16/5/2026</p>
+                    <p className="text-[#778A96]">
+                      {processFiveData?.time_stamp.split(" ")[0]
+                        ? processFiveData.time_stamp.split(" ")[0]
+                        : "--/--/----"}
+                    </p>
                   </div>
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-clock text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">08:15 A.M.</p>
+                    <p className="text-[#778A96]">
+                      {processFiveData?.time_stamp.split(" ")[1]
+                        ? processFiveData.time_stamp.split(" ")[1]
+                        : "--:--"}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <span>
-              <span className="text-[#D5D3D3] font-bold">Assembly. </span>
+              <span className="text-[#FF791B] font-bold">Assembly. </span>
               <span className="text-[#778A96] whitespace-normal">
-                Registro del producto en el punto de control del proceso 5.
-                Fecha: 16 May 2026, Hora: 10:40 AM.
+                Product register at the process 5 control point. <b>Date</b>:{" "}
+                {processFiveData?.time_stamp.split(" ")[0]
+                  ? processFiveData.time_stamp.split(" ")[0]
+                  : "Not registered"}
+                , <b>Time</b>:{" "}
+                {processFiveData?.time_stamp.split(" ")[1]
+                  ? processFiveData.time_stamp.split(" ")[1]
+                  : "Not registered"}
+                .
               </span>
             </span>
           </div>
@@ -212,7 +310,11 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 </div>
                 <div className="text-sm flex justify-center items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#778A96]"></div>
-                  <div className="text-[#778A96]">Registered</div>
+                  <div className="text-[#778A96]">
+                    {processSixData?.time_stamp.split(" ")[0]
+                      ? "Registered"
+                      : "Not Registered"}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-4">
@@ -223,20 +325,35 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
                 <div className="flex justify-center items-center gap-2">
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-calendar-minus text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">16/5/2026</p>
+                    <p className="text-[#778A96]">
+                      {processSixData?.time_stamp.split(" ")[0]
+                        ? processSixData.time_stamp.split(" ")[0]
+                        : "--/--/----"}
+                    </p>
                   </div>
                   <div className="flex gap-2 text-sm">
                     <i className="bi bi-clock text-[#3A404A]"></i>
-                    <p className="text-[#778A96]">08:15 A.M.</p>
+                    <p className="text-[#778A96]">
+                      {processSixData?.time_stamp.split(" ")[1]
+                        ? processSixData.time_stamp.split(" ")[1]
+                        : "--:--"}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <span>
-              <span className="text-[#D5D3D3] font-bold">Shipping Tape. </span>
+              <span className="text-[#FF791B] font-bold">Shipping Tape. </span>
               <span className="text-[#778A96] whitespace-normal">
-                Registro del producto en el punto de control del proceso 6.
-                Fecha: 16 May 2026, Hora: 10:35 AM.
+                Product register at the process 6 control point. <b>Date</b>:{" "}
+                {processSixData?.time_stamp.split(" ")[0]
+                  ? processSixData.time_stamp.split(" ")[0]
+                  : "Not registered"}
+                , <b>Time</b>:{" "}
+                {processSixData?.time_stamp.split(" ")[1]
+                  ? processSixData.time_stamp.split(" ")[1]
+                  : "Not registered"}
+                .
               </span>
             </span>
           </div>
