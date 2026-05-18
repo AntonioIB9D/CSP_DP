@@ -20,7 +20,6 @@ function App() {
     data: tagsProData,
     isLoading,
     isFetching,
-    error,
   } = useQuery({
     queryKey: ["tagsProData", boxId],
     queryFn: () => fetchTagsProData(Number(boxId)),
@@ -79,7 +78,7 @@ function App() {
   } */
 
   return (
-    <div className="w-full justify-center items-center">
+    <div className="w-full justify-center items-center ">
       {/* <Header /> */}
       <section
         className={`${productModel !== "Not assigned" ? "mt-12" : "mt-6"} flex min-h-full w-full justify-center -mb-20 sticky top-6 z-50`}
@@ -129,76 +128,83 @@ function App() {
         </>
       ) : (
         <>
-          <div className="flex flex-col gap-4 justify-center items-center mt-38 h-full">
-            <h1 className="text-4xl font-bold">
-              Welcome to <span className="text-[#D22D25]">CSP</span> Product{" "}
-              <span className="text-[#009DFE]">Details</span>
-            </h1>
-            <p className="text-[#778A96]">
-              Try searching a box ID to get the product information
-            </p>
-
-            <DotLottieReact
-              src="/Global Network.json"
-              autoplay
-              loop
-              className="-mt-28 w-175 h-175"
-            />
-            <div className="w-full flex flex-col justify-center items-center gap-4 -mt-28">
-              <div className="flex justify-evenly items-center w-full">
-                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#171717] border border-[#262626] rounded-xl">
-                  <div className="flex justify-evenly items-center w-full">
-                    {/* <div className="bg-[#D70B60] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi-router text-xl"></i>
-                    </div> */}
-                    <p className="text-[#D5D3D3] font-bold">Factory Info.</p>
+          <div className="flex gap-4 justify-evenly items-center h-full min-h-screen -mb-8">
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-5xl font-bold text-center">
+                Welcome to <span className="text-[#D22D25]">CSP</span> Product{" "}
+                <span className="text-[#009DFE]">Details</span>
+              </h1>
+              <p className="text-[#778A96] text-center">
+                Try searching a box ID to get the product information
+              </p>
+              <div className="flex justify-evenly items-center w-full gap-4 mt-4">
+                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                  <div className="flex flex-col gap-2 w-full justify-center items-center">
+                    <div className="bg-[#132135] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                      <i className="bi bi-router text-xl text-[#50A2FF]"></i>
+                    </div>
+                    <p className="text-[#D5D3D3] font-bold">
+                      Factory Information
+                    </p>
                   </div>
-                  <p className="text-[#949A9C]">
+                  <p className="text-[#949A9C] text-sm">
                     Get the factory details of the <br />
                     product
                   </p>
                 </div>
-                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#171717] border border-[#262626] rounded-xl">
-                  <div className="flex justify-evenly items-center w-full">
-                    {/*  <div className="bg-[#FF6A32] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi-exclamation-triangle text-xl"></i>
-                    </div> */}
+                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                  <div className="flex flex-col gap-2 w-full justify-center items-center">
+                    <div className="bg-[#331516] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                      <i className="bi bi-exclamation-triangle text-xl text-[#FF6467]"></i>
+                    </div>
                     <p className="text-[#D5D3D3] font-bold">Product Defect</p>
                   </div>
-                  <p className="text-[#949A9C]">
+                  <p className="text-[#949A9C] text-sm">
                     Get the defect associated to that <br />
                     product
                   </p>
                 </div>
-                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#171717] border border-[#262626] rounded-xl">
-                  <div className="flex justify-center items-center gap-2 w-full">
-                    {/* <div className="bg-[#0076DF] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi-clock text-xl"></i>
-                    </div> */}
-                    <p className="text-[#D5D3D3] font-bold">Time Line</p>
+                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                  <div className="flex flex-col gap-2 w-full justify-center items-center">
+                    <div className="bg-[#122B22] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                      <i className="bi bi-clock text-xl text-[#00D391]"></i>
+                    </div>
+                    <p className="text-[#D5D3D3] font-bold ">Time Line</p>
                   </div>
-                  <p className="text-[#949A9C]">
+                  <p className="text-[#949A9C] text-sm">
                     Get the time line of this product in <br />
                     the process{" "}
                   </p>
                 </div>
-                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#171717] border border-[#262626] rounded-xl">
-                  <div className="flex justify-center items-center gap-2 w-full">
-                    {/* <div className="bg-[#0076DF] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi-clock text-xl"></i>
-                    </div> */}
+              </div>
+              <div className="w-full mt-4">
+                <div className="flex justify-evenly items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                  <div className="flex flex-col gap-2 justify-center items-center">
+                    <div className="bg-[#301936] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                      <i className="bi bi bi-speedometer text-xl text-[#C17AFE]"></i>
+                    </div>
                     <p className="text-[#D5D3D3] font-bold">Press Data</p>
                   </div>
-                  <p className="text-[#949A9C]">
-                    Get the parameters of the press used to <br /> mold this
-                    product
+                  <p className="text-[#949A9C] text-sm">
+                    Get the parameters of the press used to mold this product
                   </p>
                 </div>
               </div>
             </div>
+            <div className="flex flex-col justify-center items-center gap-4">
+              <DotLottieReact
+                src="/Group working character animation.json"
+                autoplay
+                loop
+                className="w-155 h-155"
+              />
+            </div>
           </div>
         </>
       )}
+      <div className="w-full mt-2 text-[#7E8A9B] italic">
+        CSP DP powered by <b>IT Department</b> ©
+      </div>
     </div>
   );
 }

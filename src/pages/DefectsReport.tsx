@@ -29,7 +29,7 @@ const containerVariants = {
     opacity: 1,
     transition: {
       delayChildren: 1, // espera 1 segundo antes de empezar
-      staggerChildren: 2, // cada hijo aparece con 2 segundos de diferencia
+      staggerChildren: 1, // cada hijo aparece con 2 segundos de diferencia
     },
   },
 };
