@@ -20,7 +20,7 @@ export default function CustomChart({
   iconType,
   chartName,
   codeChart,
-  pressNumber,
+  /* pressNumber, */
 }: CustomChartProps) {
   return (
     <div>

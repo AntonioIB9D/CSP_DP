@@ -1,36 +1,36 @@
-import { Progress } from "@heroui/react";
-import { useMediaQuery } from "@react-hook/media-query";
-import type { TooltipProps } from "recharts";
+/* import { Progress } from "@heroui/react";
+import { useMediaQuery } from "@react-hook/media-query"; */
+/* import type { TooltipProps } from "recharts"; */
 
-type NormalizedRow = {
+/* type NormalizedRow = {
   name: number;
   // cada ciclo tendrá su valor numérico
   [cycle: string]: number | string | null;
-};
+}; */
 
-type CustomPayloadEntry = {
+/* type CustomPayloadEntry = {
   dataKey?: string;
   name?: string;
   value?: number;
   color?: string;
   payload: NormalizedRow; // 👈 aquí decimos que payload es tu fila completa
-};
+}; */
 
-export const CustomTooltip: React.FC<
+/* export const CustomTooltip: React.FC<
   TooltipProps<number, string> & {
     payload?: CustomPayloadEntry[];
     label?: string | number;
     max: number;
     min: number;
     prom: number;
-  }
-> = (props) => {
-  const { active, payload, label, max, min, prom } = props;
-  const isMobile = useMediaQuery("(max-width: 900px)");
+  } */
+/* > = ( props) => { */
+/*  const { active, payload, label, max, min, prom } = props; */
+/*  const isMobile = useMediaQuery("(max-width: 900px)"); */
 
-  if (active && payload && payload.length) {
-    return (
-      <div
+/* if (active && payload && payload.length) { */
+/*   return { */
+/* <div
         className={`bg-[#15181E] rounded-3xl shadow-md text-white flex flex-col gap-1 border-2 border-[#21242C] ${isMobile ? "w-34" : "w-100"}`}
       >
         <div className="flex items-center gap-4 p-2 border-b-2 border-[#21242C]">
@@ -125,8 +125,9 @@ export const CustomTooltip: React.FC<
             ))}
           </div>
         </div>
-      </div>
-    );
-  }
-  return null;
-};
+      </div> */
+
+/*   }; */
+/*   } */
+/* return null; */
+/* }; */

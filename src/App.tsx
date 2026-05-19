@@ -192,10 +192,15 @@ function App() {
               </div>
             </div>
             <div className="flex flex-col justify-center items-center gap-4">
-              <DotLottieReact
+              {/* <DotLottieReact
                 src="/Group working character animation.json"
                 autoplay
                 loop
+                className="w-155 h-155"
+              /> */}
+              <img
+                src="/undraw_real-time-analytics_50za.svg"
+                alt="Data Illustration"
                 className="w-155 h-155"
               />
             </div>
@@ -203,7 +208,7 @@ function App() {
         </>
       )}
       <div className="w-full mt-2 text-[#7E8A9B] italic">
-        CSP DP powered by <b>IT Department</b> ©
+        CSP DP v1.0b powered by <b>IT Department</b> ©
       </div>
     </div>
   );
