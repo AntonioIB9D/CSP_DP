@@ -7,7 +7,7 @@ import DefectsReport from "./pages/DefectsReport";
 import PressData from "./pages/PressData";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTagsProData } from "./services/TagsProService";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+/* import { DotLottieReact } from "@lottiefiles/dotlottie-react"; */
 import ProcessRegister from "./pages/ProcessRegister";
 import { Spinner } from "@heroui/react";
 import { motion } from "framer-motion";
