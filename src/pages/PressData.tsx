@@ -12,7 +12,8 @@ export default function PressData() {
         viewport={{ once: true, amount: 0.3 }}
       >
         <h1 className="text-2xl font-bold text-[#FF791B]">
-          Molding parameters
+          Molding parameters{" "}
+          <span className="text-[#86868B]">(Coming soon)</span>
         </h1>
         <h1 className="text-4xl font-bold">Parameters at your disposal</h1>
       </motion.div>

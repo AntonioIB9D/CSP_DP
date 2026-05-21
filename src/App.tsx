@@ -113,12 +113,12 @@ function App() {
             </section>
           )}
           {productModel !== "Not assigned" && (
-            <section className="flex justify-evenly items-center min-h-screen">
+            <section className="flex justify-evenly items-center min-h-[70vh]">
               <ProcessRegister tagsProData={tagsProData} />
             </section>
           )}
           {productModel !== "Not assigned" && (
-            <section className="flex justify-evenly items-center min-h-screen">
+            <section className="flex justify-evenly items-center min-h-[70vh]">
               <DefectsReport
                 tagsProData={tagsProData}
                 productModel={productModel}
@@ -126,68 +126,85 @@ function App() {
             </section>
           )}
         </>
+      ) : tagsProData && tagsProData.length === 0 ? (
+        <>
+          <div className="flex flex-col gap-4 justify-center items-center h-full min-h-screen -mb-8">
+            <h1 className="text-[#FF791B] font-bold text-5xl">Ooooooops!</h1>
+            <p className="text-[#D5D3D3] text-2xl">
+              Sorry, we do not have information about this product
+            </p>
+            <p className="text-[#6A889B] text-sm">
+              Try searching another box ID or contact the IT department for more
+              information
+            </p>
+          </div>
+        </>
       ) : (
         <>
           <div className="flex gap-4 justify-evenly items-center h-full min-h-screen -mb-8">
-            <div className="flex flex-col justify-center items-center">
-              <h1 className="text-5xl font-bold text-center">
-                Welcome to <span className="text-[#D22D25]">CSP</span> Product{" "}
-                <span className="text-[#009DFE]">Details</span>
-              </h1>
-              <p className="text-[#778A96] text-center">
-                Try searching a box ID to get the product information
-              </p>
-              <div className="flex justify-evenly items-center w-full gap-4 mt-4">
-                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
-                  <div className="flex flex-col gap-2 w-full justify-center items-center">
-                    <div className="bg-[#132135] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi-router text-xl text-[#50A2FF]"></i>
+            <div className="flex flex-col justify-evenly items-center gap-30">
+              <div className="flex flex-col gap-4 p-2">
+                <h1 className="text-5xl font-bold text-center">
+                  Welcome to <span className="text-[#D22D25]">CSP</span> Product{" "}
+                  <span className="text-[#009DFE]">Details</span>
+                </h1>
+                <p className="text-[#778A96] text-center">
+                  Try searching a box ID to get the product information
+                </p>
+              </div>
+              <div className="">
+                <div className="flex justify-evenly items-center w-full gap-4 mt-4">
+                  <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                    <div className="flex flex-col gap-2 w-full justify-center items-center">
+                      <div className="bg-[#132135] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                        <i className="bi bi-router text-xl text-[#50A2FF]"></i>
+                      </div>
+                      <p className="text-[#D5D3D3] font-bold">
+                        Factory Information
+                      </p>
                     </div>
-                    <p className="text-[#D5D3D3] font-bold">
-                      Factory Information
+                    <p className="text-[#949A9C] text-sm">
+                      Get the factory details of the <br />
+                      product
                     </p>
                   </div>
-                  <p className="text-[#949A9C] text-sm">
-                    Get the factory details of the <br />
-                    product
-                  </p>
-                </div>
-                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
-                  <div className="flex flex-col gap-2 w-full justify-center items-center">
-                    <div className="bg-[#331516] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi-exclamation-triangle text-xl text-[#FF6467]"></i>
+                  <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                    <div className="flex flex-col gap-2 w-full justify-center items-center">
+                      <div className="bg-[#331516] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                        <i className="bi bi-exclamation-triangle text-xl text-[#FF6467]"></i>
+                      </div>
+                      <p className="text-[#D5D3D3] font-bold">Product Defect</p>
                     </div>
-                    <p className="text-[#D5D3D3] font-bold">Product Defect</p>
+                    <p className="text-[#949A9C] text-sm">
+                      Get the defect associated to that <br />
+                      product
+                    </p>
                   </div>
-                  <p className="text-[#949A9C] text-sm">
-                    Get the defect associated to that <br />
-                    product
-                  </p>
-                </div>
-                <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
-                  <div className="flex flex-col gap-2 w-full justify-center items-center">
-                    <div className="bg-[#122B22] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi-clock text-xl text-[#00D391]"></i>
+                  <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                    <div className="flex flex-col gap-2 w-full justify-center items-center">
+                      <div className="bg-[#122B22] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                        <i className="bi bi-clock text-xl text-[#00D391]"></i>
+                      </div>
+                      <p className="text-[#D5D3D3] font-bold ">Time Line</p>
                     </div>
-                    <p className="text-[#D5D3D3] font-bold ">Time Line</p>
+                    <p className="text-[#949A9C] text-sm">
+                      Get the time line of this product in <br />
+                      the process{" "}
+                    </p>
                   </div>
-                  <p className="text-[#949A9C] text-sm">
-                    Get the time line of this product in <br />
-                    the process{" "}
-                  </p>
                 </div>
-              </div>
-              <div className="w-full mt-4">
-                <div className="flex justify-evenly items-center gap-2 p-4 bg-[#15181E] rounded-xl">
-                  <div className="flex flex-col gap-2 justify-center items-center">
-                    <div className="bg-[#301936] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
-                      <i className="bi bi bi-speedometer text-xl text-[#C17AFE]"></i>
+                <div className="w-full mt-4">
+                  <div className="flex justify-evenly items-center gap-2 p-4 bg-[#15181E] rounded-xl">
+                    <div className="flex flex-col gap-2 justify-center items-center">
+                      <div className="bg-[#301936] rounded-xl p-2 w-10 h-10 flex justify-center items-center">
+                        <i className="bi bi bi-speedometer text-xl text-[#C17AFE]"></i>
+                      </div>
+                      <p className="text-[#D5D3D3] font-bold">Press Data</p>
                     </div>
-                    <p className="text-[#D5D3D3] font-bold">Press Data</p>
+                    <p className="text-[#949A9C] text-sm">
+                      Get the parameters of the press used to mold this product
+                    </p>
                   </div>
-                  <p className="text-[#949A9C] text-sm">
-                    Get the parameters of the press used to mold this product
-                  </p>
                 </div>
               </div>
             </div>
@@ -196,19 +213,19 @@ function App() {
                 src="/Group working character animation.json"
                 autoplay
                 loop
-                className="w-155 h-155"
+                className="w-155 h-165"
               /> */}
               <img
-                src="/undraw_real-time-analytics_50za.svg"
+                src="/Drill Entrance Edited.png"
                 alt="Data Illustration"
-                className="w-155 h-155"
+                className="w-230 h-165 rounded-none blur-[2px] opacity-65 lg:flex hidden"
               />
             </div>
           </div>
         </>
       )}
       <div className="w-full mt-2 text-[#7E8A9B] italic">
-        CSP DP v1.0b powered by <b>IT Department</b> ©
+        CSP DP v1.1b powered by <b>IT Department</b> ©
       </div>
     </div>
   );

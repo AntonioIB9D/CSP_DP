@@ -47,7 +47,15 @@ export default function LeftPanel({ tagsProData }: LeftPanelPros) {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-[#FF791B]">Product</h1>
           <p className="text-[#D5D3D3]">
-            This product contains all window cutouts{" "}
+            {productModel === "AK010"
+              ? "This product not contains window cutouts"
+              : productModel === "AK020"
+                ? "This product not contains window cutouts"
+                : productModel === "AK030"
+                  ? "This product contains 2 window cutouts"
+                  : productModel === "AK040"
+                    ? "This product contains 2 window cutouts"
+                    : "This product contains all window cutouts (5)"}
           </p>
         </div>
       ) : (
