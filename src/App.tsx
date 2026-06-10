@@ -26,8 +26,6 @@ function App() {
     enabled: !!boxId, // Solo ejecutar la consulta si boxId no es vacío
   });
 
-  console.log("tagsProData:", tagsProData);
-
   const firstBoxStep = tagsProData ? tagsProData[0] : null;
 
   const ak050 =
@@ -73,12 +71,6 @@ function App() {
     );
   }
 
-  /*  if (error) {
-    return toast.error(
-      "Error fetching data for the selected press. Please try again.",
-    );
-  } */
-
   return (
     <div className="w-full justify-center items-center ">
       {/* <Header /> */}
@@ -87,8 +79,10 @@ function App() {
       >
         <SearchBox onSearch={setBoxId} />
       </section>
-      {tagsProData && tagsProData.length > 0 ? (
+      {tagsProData && tagsProData.length > 0 && firstBoxStep?.proceso === 1 ? (
         <>
+          {console.log("Hay datos")}
+          {console.log(tagsProData)}
           <section className="flex justify-evenly items-center min-h-screen">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -128,8 +122,12 @@ function App() {
             </section>
           )}
         </>
-      ) : tagsProData && tagsProData.length === 0 ? (
+      ) : tagsProData &&
+        tagsProData?.length <= 0 &&
+        firstBoxStep?.proceso !== 1 ? (
         <>
+          {console.log("No hay datos")}
+          {console.log(tagsProData)}
           <div className="flex flex-col gap-4 justify-center items-center h-full min-h-screen -mb-8">
             <h1 className="text-[#FF791B] font-bold text-5xl">Ooooooops!</h1>
             <p className="text-[#D5D3D3] text-2xl">
@@ -143,6 +141,7 @@ function App() {
         </>
       ) : (
         <>
+          {console.log("Main")}
           <div className="flex gap-4 justify-evenly items-center h-full min-h-screen -mb-8">
             <div className="flex flex-col justify-evenly items-center gap-30">
               <div className="flex flex-col gap-4 p-2">

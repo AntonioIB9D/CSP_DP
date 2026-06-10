@@ -129,7 +129,7 @@ export default function RightPanel({ tagsProData }: RightPanelPros) {
           />
           <FactoryOption
             factoryOptionName="Festoon SMC"
-            value={firstBoxStep?.serie}
+            value={firstBoxStep?.serie ? firstBoxStep?.serie : "-"}
             icon="bi bi-upc-scan"
           />
           <FactoryOption
@@ -140,7 +140,7 @@ export default function RightPanel({ tagsProData }: RightPanelPros) {
           <FactoryOption factoryOptionName="Press" value={pressNumber} />
           <FactoryOption
             factoryOptionName="Festoon Supplier"
-            value={firstBoxStep?.supplierName}
+            value={firstBoxStep?.serie ? firstBoxStep?.supplierName : "-"}
             icon="bi bi-box-seam"
           />
           <FactoryOption
