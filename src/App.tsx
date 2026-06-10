@@ -26,6 +26,8 @@ function App() {
     enabled: !!boxId, // Solo ejecutar la consulta si boxId no es vacío
   });
 
+  console.log("tagsProData:", tagsProData);
+
   const firstBoxStep = tagsProData ? tagsProData[0] : null;
 
   const ak050 =
