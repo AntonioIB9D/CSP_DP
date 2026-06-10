@@ -1,6 +1,6 @@
 type FactoryOptionProps = {
   factoryOptionName: string;
-  value: string | number;
+  value: string | number | null | undefined;
   icon?: string;
 };
 
