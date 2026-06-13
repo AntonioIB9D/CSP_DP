@@ -71,18 +71,18 @@ function App() {
     );
   }
 
+  console.log("Data encontrada: ", tagsProData);
+
   return (
     <div className="w-full justify-center items-center ">
       {/* <Header /> */}
       <section
         className={`${productModel !== "Not assigned" ? "mt-12" : "mt-6"} flex min-h-full w-full justify-center -mb-20 sticky top-6 z-50`}
       >
-        <SearchBox onSearch={setBoxId} />
+        <SearchBox onSearch={setBoxId} tagsProData={tagsProData} />
       </section>
       {tagsProData && tagsProData.length > 0 && firstBoxStep?.proceso === 1 ? (
         <>
-          {console.log("Hay datos")}
-          {console.log(tagsProData)}
           <section className="flex justify-evenly items-center min-h-screen">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -123,11 +123,9 @@ function App() {
           )}
         </>
       ) : tagsProData &&
-        tagsProData?.length <= 0 &&
+        tagsProData?.length > 0 &&
         firstBoxStep?.proceso !== 1 ? (
         <>
-          {console.log("No hay datos")}
-          {console.log(tagsProData)}
           <div className="flex flex-col gap-4 justify-center items-center h-full min-h-screen -mb-8">
             <h1 className="text-[#FF791B] font-bold text-5xl">Ooooooops!</h1>
             <p className="text-[#D5D3D3] text-2xl">
@@ -141,7 +139,6 @@ function App() {
         </>
       ) : (
         <>
-          {console.log("Main")}
           <div className="flex gap-4 justify-evenly items-center h-full min-h-screen -mb-8">
             <div className="flex flex-col justify-evenly items-center gap-30">
               <div className="flex flex-col gap-4 p-2">
@@ -226,7 +223,7 @@ function App() {
         </>
       )}
       <div className="w-full mt-2 text-[#7E8A9B] italic">
-        CSP DP v1.1b powered by <b>IT Department</b> ©
+        CSP DP v2.1b powered by <b>IT Department</b> ©
       </div>
     </div>
   );

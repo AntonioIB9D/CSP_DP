@@ -1,5 +1,8 @@
 import { Button } from "@heroui/react";
 import { useForm } from "react-hook-form";
+import type { TagsData } from "../schemas/tagsPro.schema";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ReportPDF from "./ReportPDF";
 
 type SearchBox = {
   boxId: string;
@@ -7,10 +10,13 @@ type SearchBox = {
 
 type searchBoxProps = {
   onSearch: (boxId: string) => void;
+  tagsProData: TagsData | null | undefined;
 };
 
-export default function SearchBox({ onSearch }: searchBoxProps) {
+export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
   const { register, handleSubmit } = useForm<SearchBox>();
+
+  const firstBoxStep = tagsProData ? tagsProData[0] : null;
 
   const onSubmit = (data: SearchBox) => {
     onSearch(data.boxId);
@@ -59,8 +65,22 @@ export default function SearchBox({ onSearch }: searchBoxProps) {
             <Button
               className="h-8 flex justify-center items-center"
               variant="danger-soft"
+              isDisabled={
+                tagsProData &&
+                tagsProData?.length > 0 &&
+                firstBoxStep?.proceso === 1
+                  ? false
+                  : true
+              }
             >
-              Report <i className="bi bi-download"></i>
+              <PDFDownloadLink
+                document={<ReportPDF data={tagsProData} />}
+                fileName={`Reporte`}
+              >
+                <p>
+                  Report <i className="bi bi-download"></i>
+                </p>
+              </PDFDownloadLink>
             </Button>
           </div>
         </form>

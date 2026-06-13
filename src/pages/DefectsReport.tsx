@@ -95,8 +95,6 @@ export default function DefectsReport({
                     ? "SD Side D"
                     : "";
 
-  console.log("zone mt-16:", zone);
-
   return (
     <div className="text-center">
       <div className={zone && zone.length > 0 ? "mt-16" : "-mt-50"}>
