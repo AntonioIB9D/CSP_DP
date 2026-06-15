@@ -6,9 +6,6 @@ import {
   Text,
   View,
   Font,
-  Svg,
-  G,
-  Polygon,
 } from "@react-pdf/renderer";
 import type { TagsData } from "../schemas/tagsPro.schema";
 
@@ -70,6 +67,11 @@ const styles = StyleSheet.create({
     color: "#D57F43",
     fontSize: "16px",
     fontFamily: "Outfit",
+  },
+  grayLightContainer: {
+    backgroundColor: "#121214",
+    borderRadius: "15px",
+    padding: "12px",
   },
 });
 
@@ -179,8 +181,16 @@ export default function ReportPDF({ data }: ReportPDFProps) {
 
   const zone = firstBoxStep?.zona;
 
+  const processOneData = data?.find((step) => step.proceso === 1);
+  const processTwoData = data?.find((step) => step.proceso === 2);
+  const processThreeData = data?.find((step) => step.proceso === 3);
+  const processFourData = data?.find((step) => step.proceso === 4);
+  const processFiveData = data?.find((step) => step.proceso === 5);
+  const processSixData = data?.find((step) => step.proceso === 6);
+
   return (
     <Document>
+      {/* Product Page */}
       <Page style={styles.page} size="A4">
         <View>
           <Text
@@ -499,6 +509,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
           </View>
         </View>
       </Page>
+      {/* Product Registration Page */}
       <Page style={styles.page} size="A4">
         <View>
           <Text
@@ -529,19 +540,637 @@ export default function ReportPDF({ data }: ReportPDFProps) {
         </View>
         <View
           style={{
-            marginTop: "50px",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
             padding: "16px",
+            flexWrap: "wrap",
+            gap: "16px",
           }}
         >
+          {/* Process 1 */}
+          <View
+            style={[
+              styles.grayLightContainer,
+              {
+                marginTop: "50px",
+                padding: "16px",
+                display: "flex",
+                width: "200px",
+                height: "200px",
+              },
+            ]}
+          >
+            <View
+              style={{
+                backgroundColor: "#171E2D",
+                borderRadius: "5px",
+                padding: "4px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#0566ED",
+                  fontSize: "9px",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  textAlign: "center",
+                }}
+              >
+                Process 1
+              </Text>
+            </View>
+            <Image
+              style={{
+                width: "120px",
+                height: "95px",
+                marginLeft: "30px",
+                marginTop: "10px",
+                borderRadius: "5px",
+                opacity: "0.6",
+              }}
+              src="Drill 2.jpeg"
+            />
+
+            <Text
+              style={[
+                {
+                  color: "#FF6A0F",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  fontSize: "12px",
+                  textAlign: "center",
+                  marginTop: "5px",
+                },
+              ]}
+            >
+              Drill Entrance
+            </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "8px",
+                justifyContent: "center",
+                alignContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Date:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processOneData?.time_stamp.split(" ")[0]}
+                </Text>
+              </Text>
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Time:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processOneData?.time_stamp.split(" ")[1]}{" "}
+                </Text>
+              </Text>
+            </View>
+
+            {/*  <Text style={{ color: "#FFFFFF" }}>Date: {}</Text> */}
+          </View>
+          {/* Process 2 */}
+          <View
+            style={[
+              styles.grayLightContainer,
+              {
+                marginTop: "50px",
+                padding: "16px",
+                display: "flex",
+                width: "200px",
+                height: "200px",
+              },
+            ]}
+          >
+            <View
+              style={{
+                backgroundColor: "#171E2D",
+                borderRadius: "5px",
+                padding: "4px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#13CB6C",
+                  fontSize: "9px",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  textAlign: "center",
+                }}
+              >
+                Process 2
+              </Text>
+            </View>
+            <Image
+              style={{
+                width: "120px",
+                height: "95px",
+                marginLeft: "30px",
+                marginTop: "10px",
+                borderRadius: "5px",
+                opacity: "0.6",
+              }}
+              src="Drill 2.jpeg"
+            />
+
+            <Text
+              style={[
+                {
+                  color: "#FF6A0F",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  fontSize: "12px",
+                  textAlign: "center",
+                  marginTop: "5px",
+                },
+              ]}
+            >
+              Drill Exit
+            </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "8px",
+                justifyContent: "center",
+                alignContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Date:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processTwoData?.time_stamp.split(" ")[0]
+                    ? processTwoData?.time_stamp.split(" ")[0]
+                    : "-"}
+                </Text>
+              </Text>
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Time:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processTwoData?.time_stamp.split(" ")[1]
+                    ? processTwoData?.time_stamp.split(" ")[1]
+                    : "-"}{" "}
+                </Text>
+              </Text>
+            </View>
+          </View>
+          {/* Process 3 */}
+          <View
+            style={[
+              styles.grayLightContainer,
+              {
+                padding: "16px",
+                display: "flex",
+                width: "200px",
+                height: "200px",
+              },
+            ]}
+          >
+            <View
+              style={{
+                backgroundColor: "#171E2D",
+                borderRadius: "5px",
+                padding: "4px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#FF6831",
+                  fontSize: "9px",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  textAlign: "center",
+                }}
+              >
+                Process 3
+              </Text>
+            </View>
+            <Image
+              style={{
+                width: "120px",
+                height: "95px",
+                marginLeft: "30px",
+                marginTop: "10px",
+                borderRadius: "5px",
+                opacity: "0.6",
+              }}
+              src="Drill 2.jpeg"
+            />
+
+            <Text
+              style={[
+                {
+                  color: "#FF6A0F",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  fontSize: "12px",
+                  textAlign: "center",
+                  marginTop: "5px",
+                },
+              ]}
+            >
+              Paint Entrance
+            </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "8px",
+                justifyContent: "center",
+                alignContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Date:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processThreeData?.time_stamp.split(" ")[0]
+                    ? processThreeData?.time_stamp.split(" ")[0]
+                    : "-"}
+                </Text>
+              </Text>
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Time:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processThreeData?.time_stamp.split(" ")[1]
+                    ? processThreeData?.time_stamp.split(" ")[1]
+                    : "-"}{" "}
+                </Text>
+              </Text>
+            </View>
+          </View>
+          {/* Process 4 */}
+          <View
+            style={[
+              styles.grayLightContainer,
+              {
+                padding: "16px",
+                display: "flex",
+                width: "200px",
+                height: "200px",
+              },
+            ]}
+          >
+            <View
+              style={{
+                backgroundColor: "#171E2D",
+                borderRadius: "5px",
+                padding: "4px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#BE0B60",
+                  fontSize: "9px",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  textAlign: "center",
+                }}
+              >
+                Process 4
+              </Text>
+            </View>
+            <Image
+              style={{
+                width: "120px",
+                height: "95px",
+                marginLeft: "30px",
+                marginTop: "10px",
+                borderRadius: "5px",
+                opacity: "0.6",
+              }}
+              src="Drill 2.jpeg"
+            />
+
+            <Text
+              style={[
+                {
+                  color: "#FF6A0F",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  fontSize: "12px",
+                  textAlign: "center",
+                  marginTop: "5px",
+                },
+              ]}
+            >
+              Paint Exit
+            </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "8px",
+                justifyContent: "center",
+                alignContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Date:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processFourData?.time_stamp.split(" ")[0]
+                    ? processFourData?.time_stamp.split(" ")[0]
+                    : "-"}
+                </Text>
+              </Text>
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Time:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processFourData?.time_stamp.split(" ")[1]
+                    ? processFourData?.time_stamp.split(" ")[1]
+                    : "-"}{" "}
+                </Text>
+              </Text>
+            </View>
+          </View>
+          {/* Process 5 */}
+          <View
+            style={[
+              styles.grayLightContainer,
+              {
+                padding: "16px",
+                display: "flex",
+                width: "200px",
+                height: "200px",
+              },
+            ]}
+          >
+            <View
+              style={{
+                backgroundColor: "#171E2D",
+                borderRadius: "5px",
+                padding: "4px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#43A6F6",
+                  fontSize: "9px",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  textAlign: "center",
+                }}
+              >
+                Process 5
+              </Text>
+            </View>
+            <Image
+              style={{
+                width: "120px",
+                height: "95px",
+                marginLeft: "30px",
+                marginTop: "10px",
+                borderRadius: "5px",
+                opacity: "0.6",
+              }}
+              src="Drill 2.jpeg"
+            />
+
+            <Text
+              style={[
+                {
+                  color: "#FF6A0F",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  fontSize: "12px",
+                  textAlign: "center",
+                  marginTop: "5px",
+                },
+              ]}
+            >
+              Assembly
+            </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "8px",
+                justifyContent: "center",
+                alignContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Date:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processFiveData?.time_stamp.split(" ")[0]
+                    ? processFiveData?.time_stamp.split(" ")[0]
+                    : "-"}
+                </Text>
+              </Text>
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Time:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processFiveData?.time_stamp.split(" ")[1]
+                    ? processFiveData?.time_stamp.split(" ")[1]
+                    : "-"}{" "}
+                </Text>
+              </Text>
+            </View>
+          </View>
+          {/* Process 6 */}
+          <View
+            style={[
+              styles.grayLightContainer,
+              {
+                padding: "16px",
+                display: "flex",
+                width: "200px",
+                height: "200px",
+              },
+            ]}
+          >
+            <View
+              style={{
+                backgroundColor: "#171E2D",
+                borderRadius: "5px",
+                padding: "4px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#688896",
+                  fontSize: "9px",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  textAlign: "center",
+                }}
+              >
+                Process 6
+              </Text>
+            </View>
+            <Image
+              style={{
+                width: "120px",
+                height: "95px",
+                marginLeft: "30px",
+                marginTop: "10px",
+                borderRadius: "5px",
+                opacity: "0.6",
+              }}
+              src="Drill 2.jpeg"
+            />
+
+            <Text
+              style={[
+                {
+                  color: "#FF6A0F",
+                  fontWeight: "bold",
+                  fontFamily: "Outfit",
+                  fontSize: "12px",
+                  textAlign: "center",
+                  marginTop: "5px",
+                },
+              ]}
+            >
+              Shipping Tape
+            </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "8px",
+                justifyContent: "center",
+                alignContent: "center",
+                marginTop: "10px",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Date:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processSixData?.time_stamp.split(" ")[0]
+                    ? processSixData?.time_stamp.split(" ")[0]
+                    : "-"}
+                </Text>
+              </Text>
+              <Text
+                style={{
+                  color: "#778A96",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                }}
+              >
+                Time:{" "}
+                <Text style={{ fontWeight: "100" }}>
+                  {processSixData?.time_stamp.split(" ")[1]
+                    ? processSixData?.time_stamp.split(" ")[1]
+                    : "-"}{" "}
+                </Text>
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Page>
+      {/* Defects Page */}
+      <Page style={styles.page} size="A4">
+        <View>
+          <Text
+            style={[
+              styles.textOrangeOne,
+              {
+                textAlign: "center",
+                marginTop: "50px",
+                fontWeight: "bold",
+                fontSize: "15px",
+                fontFamily: "Outfit",
+              },
+            ]}
+          >
+            Defects Report
+          </Text>
           <Text
             style={{
-              color: "#FF6A0F",
+              color: "#D5D3D3",
+              textAlign: "center",
               fontWeight: "bold",
+              fontSize: "25px",
               fontFamily: "Outfit",
-              fontSize: "12px",
             }}
           >
-            Drill Entrance:
+            Product Defects at your disposal
           </Text>
         </View>
       </Page>
