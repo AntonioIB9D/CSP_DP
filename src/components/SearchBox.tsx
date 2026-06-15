@@ -75,7 +75,7 @@ export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
             >
               <PDFDownloadLink
                 document={<ReportPDF data={tagsProData} />}
-                fileName={`Reporte`}
+                fileName={`Report - ${firstBoxStep?.boxId}`}
               >
                 <p>
                   Report <i className="bi bi-download"></i>

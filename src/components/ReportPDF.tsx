@@ -8,6 +8,16 @@ import {
   Font,
 } from "@react-pdf/renderer";
 import type { TagsData } from "../schemas/tagsPro.schema";
+import {
+  ldSideA,
+  ldSideB,
+  ldSideC,
+  ldSideD,
+  sdSideA,
+  sdSideB,
+  sdSideC,
+  sdSideD,
+} from "../data/boxesZones";
 
 Font.register({
   family: "Outfit",
@@ -38,6 +48,12 @@ const styles = StyleSheet.create({
   imageModel: {
     width: "370px",
     height: "200px",
+    marginLeft: "110px",
+    marginTop: "30px",
+  },
+  imageDefectModel: {
+    width: "370px",
+    height: "220px",
     marginLeft: "110px",
     marginTop: "30px",
   },
@@ -187,6 +203,55 @@ export default function ReportPDF({ data }: ReportPDFProps) {
   const processFourData = data?.find((step) => step.proceso === 4);
   const processFiveData = data?.find((step) => step.proceso === 5);
   const processSixData = data?.find((step) => step.proceso === 6);
+
+  const arraysld = { ldSideA, ldSideB, ldSideC, ldSideD };
+  const arrayssd = { sdSideA, sdSideB, sdSideC, sdSideD };
+  let foundIn: [string, string[]] | undefined;
+
+  if (
+    productModel === "AK020" ||
+    productModel === "AK040" ||
+    productModel === "AK060"
+  ) {
+    foundIn = Object.entries(arraysld).find(([, arr]) => {
+      if (zone === undefined) return false;
+      return Array.isArray(zone)
+        ? zone.some((z) => arr?.includes(z))
+        : arr?.includes(zone);
+    });
+  } else if (
+    productModel === "AK010" ||
+    productModel === "AK030" ||
+    productModel === "AK050"
+  ) {
+    foundIn = Object.entries(arrayssd).find(([, arr]) => {
+      if (zone === undefined) return false;
+      return Array.isArray(zone)
+        ? zone.some((z) => arr?.includes(z))
+        : arr?.includes(zone);
+    });
+  } else {
+    return null;
+  }
+
+  const boxImage =
+    foundIn?.[0] === "ldSideA"
+      ? "LD Side A"
+      : foundIn?.[0] === "ldSideB"
+        ? "LD Side B"
+        : foundIn?.[0] === "ldSideC"
+          ? "LD Side C"
+          : foundIn?.[0] === "ldSideD"
+            ? "LD Side D"
+            : foundIn?.[0] === "sdSideA"
+              ? "SD Side A"
+              : foundIn?.[0] === "sdSideB"
+                ? "SD Side B"
+                : foundIn?.[0] === "sdSideC"
+                  ? "SD Side C"
+                  : foundIn?.[0] === "sdSideD"
+                    ? "SD Side D"
+                    : "";
 
   return (
     <Document>
@@ -553,7 +618,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             style={[
               styles.grayLightContainer,
               {
-                marginTop: "50px",
+                marginTop: "30px",
                 padding: "16px",
                 display: "flex",
                 width: "200px",
@@ -651,7 +716,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             style={[
               styles.grayLightContainer,
               {
-                marginTop: "50px",
+                marginTop: "30px",
                 padding: "16px",
                 display: "flex",
                 width: "200px",
@@ -687,7 +752,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 borderRadius: "5px",
                 opacity: "0.6",
               }}
-              src="Drill 2.jpeg"
+              src="DrillExit.jpeg"
             />
 
             <Text
@@ -786,7 +851,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 borderRadius: "5px",
                 opacity: "0.6",
               }}
-              src="Drill 2.jpeg"
+              src="PaintEntrance.jpeg"
             />
 
             <Text
@@ -885,7 +950,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 borderRadius: "5px",
                 opacity: "0.6",
               }}
-              src="Drill 2.jpeg"
+              src="Paint Exit 2.jpeg"
             />
 
             <Text
@@ -984,7 +1049,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 borderRadius: "5px",
                 opacity: "0.6",
               }}
-              src="Drill 2.jpeg"
+              src="Assembly.jpeg"
             />
 
             <Text
@@ -1083,7 +1148,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 borderRadius: "5px",
                 opacity: "0.6",
               }}
-              src="Drill 2.jpeg"
+              src="ShippingTape.jpeg"
             />
 
             <Text
@@ -1173,6 +1238,324 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             Product Defects at your disposal
           </Text>
         </View>
+        {zone && zone.length > 0 ? (
+          <View>
+            <View>
+              <Image
+                style={styles.imageDefectModel}
+                src={`/Product Models/${boxImage}.png`}
+              />
+            </View>
+            <View
+              style={[
+                styles.backgroundGray,
+                {
+                  borderRadius: "15px",
+                  marginTop: "50px",
+                  marginLeft: "15px",
+                  marginRight: "15px",
+                  padding: "16px",
+                },
+              ]}
+            >
+              <View
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "6px",
+                  justifyContent: "flex-end",
+                  marginTop: "5px",
+                }}
+              >
+                <View
+                  style={{
+                    borderRadius: "9999px",
+                    backgroundColor: "#27C93F",
+                    width: "8px",
+                    height: "8px",
+                  }}
+                ></View>
+                <View
+                  style={{
+                    borderRadius: "9999px",
+                    backgroundColor: "#FFBD2E",
+                    width: "8px",
+                    height: "8px",
+                  }}
+                ></View>
+                <View
+                  style={{
+                    borderRadius: "9999px",
+                    backgroundColor: "#FF5F56",
+                    width: "8px",
+                    height: "8px",
+                  }}
+                ></View>
+              </View>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "8px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: "16px",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, {}]}>Defect</Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      { fontWeight: "bold", fontSize: "10px" },
+                    ]}
+                  >
+                    {firstBoxStep?.defecto}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: "16px",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, {}]}>Zone</Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      {
+                        fontWeight: "bold",
+                        fontSize: "10px",
+                        textAlign: "center",
+                      },
+                    ]}
+                  >
+                    {zone}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: "16px",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, {}]}>Process</Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      {
+                        fontWeight: "bold",
+                        fontSize: "10px",
+                        textAlign: "center",
+                      },
+                    ]}
+                  >
+                    {firstBoxStep?.procesoDetectado}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: "16px",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, {}]}>Rework start time</Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      {
+                        fontWeight: "bold",
+                        fontSize: "10px",
+                        textAlign: "center",
+                      },
+                    ]}
+                  >
+                    {firstBoxStep?.rwFechaRecibe[0] !== null
+                      ? firstBoxStep?.rwFechaRecibe[0]
+                      : "NO DATA"}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginTop: "16px",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, {}]}>Rework End Time</Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      {
+                        fontWeight: "bold",
+                        fontSize: "10px",
+                        textAlign: "center",
+                      },
+                    ]}
+                  >
+                    {firstBoxStep?.rwFechaLibera[0] !== null
+                      ? firstBoxStep?.rwFechaLibera[0]
+                      : "NO DATA"}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, { textAlign: "center" }]}>
+                    Quality Realease Date
+                  </Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      {
+                        fontWeight: "bold",
+                        fontSize: "10px",
+                        textAlign: "center",
+                      },
+                    ]}
+                  >
+                    {firstBoxStep?.qcFechaLibera[0] !== null
+                      ? firstBoxStep?.qcFechaLibera[0]
+                      : "NO DATA"}
+                  </Text>
+                </View>
+
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, {}]}>Quality Inspector</Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      {
+                        fontWeight: "bold",
+                        fontSize: "10px",
+                        textAlign: "center",
+                      },
+                    ]}
+                  >
+                    {firstBoxStep?.qcLibera[0] !== null
+                      ? firstBoxStep?.qcLibera[0]
+                      : "NO DATA"}
+                  </Text>
+                </View>
+
+                <View
+                  style={[
+                    styles.optionColor,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    },
+                  ]}
+                >
+                  <Text style={[styles.smallText, {}]}>Status</Text>
+                  <Text
+                    style={[
+                      styles.OrangeMediumText,
+                      {
+                        fontWeight: "bold",
+                        fontSize: "10px",
+                        textAlign: "center",
+                      },
+                    ]}
+                  >
+                    {firstBoxStep?.status}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        ) : (
+          <View
+            style={{
+              marginTop: "20px",
+              marginLeft: "100px",
+            }}
+          >
+            <Image
+              style={{
+                width: "350px",
+                height: "300px",
+                marginLeft: "30px",
+                marginTop: "10px",
+                borderRadius: "5px",
+                opacity: "0.8",
+              }}
+              src="FinishGood.jpeg"
+            />
+            <Text
+              style={{
+                color: "#86868B",
+                fontFamily: "Outfit",
+                fontSize: "12px",
+                marginTop: "12px",
+                marginLeft: "65px",
+              }}
+            >
+              This product does not contain associated defects
+            </Text>
+          </View>
+        )}
       </Page>
     </Document>
   );

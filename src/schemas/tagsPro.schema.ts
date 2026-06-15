@@ -19,6 +19,7 @@ const TagSchema = z.object({
   qcLibera: z.array(z.string().nullable()),
   supplierName: z.string().nullable(),
   serie: z.string().nullable(),
+  boxId: z.number().nullable(),
 });
 
 export const TagsResponseSchema = z.array(TagSchema);
