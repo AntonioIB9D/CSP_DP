@@ -100,22 +100,22 @@ export default function ReportPDF({ data }: ReportPDFProps) {
   const firstBoxStep = data ? data[0] : null;
 
   const ak050 =
-    firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");
+    firstBoxStep?.product[0] && firstBoxStep?.product[0]?.includes("AK050");
   const ak030 =
     firstBoxStep?.product[0] !== undefined &&
-    firstBoxStep?.product[0].includes("AK030");
+    firstBoxStep?.product[0]?.includes("AK030");
   const ak010 =
     firstBoxStep?.product[0] !== undefined &&
-    firstBoxStep?.product[0].includes("AK010");
+    firstBoxStep?.product[0]?.includes("AK010");
   const ak060 =
     firstBoxStep?.product[0] !== undefined &&
-    firstBoxStep?.product[0].includes("AK060");
+    firstBoxStep?.product[0]?.includes("AK060");
   const ak040 =
     firstBoxStep?.product[0] !== undefined &&
-    firstBoxStep?.product[0].includes("AK040");
+    firstBoxStep?.product[0]?.includes("AK040");
   const ak020 =
     firstBoxStep?.product[0] !== undefined &&
-    firstBoxStep?.product[0].includes("AK020");
+    firstBoxStep?.product[0]?.includes("AK020");
 
   // Option to product model
   const productModel =
@@ -160,11 +160,11 @@ export default function ReportPDF({ data }: ReportPDFProps) {
         ? "Long Deck"
         : "-";
 
-  const manufacturingDate = firstBoxStep?.time_stamp.split(" ") || "-";
+  const manufacturingDate = firstBoxStep?.time_stamp?.split(" ") || "-";
 
   const cavidad = firstBoxStep?.cavidad[0] || "-";
 
-  const pressNumberCut = firstBoxStep?.tag.charAt(0) || "-";
+  const pressNumberCut = firstBoxStep?.tag?.charAt(0) || "-";
   const pressNumber =
     pressNumberCut === "1"
       ? "1"
@@ -190,20 +190,20 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 : "-";
 
   const FestoonSerieOne = firstBoxStep?.serie
-    ? firstBoxStep?.serie.split("-")[0]
+    ? firstBoxStep?.serie?.split("-")[0]
     : "-";
   const FestoonSerieTwo = firstBoxStep?.serie
-    ? firstBoxStep?.serie.split("-")[1]
+    ? firstBoxStep?.serie?.split("-")[1]
     : "-";
 
   const zone = firstBoxStep?.zona;
 
-  const processOneData = data?.find((step) => step.proceso === 1);
-  const processTwoData = data?.find((step) => step.proceso === 2);
-  const processThreeData = data?.find((step) => step.proceso === 3);
-  const processFourData = data?.find((step) => step.proceso === 4);
-  const processFiveData = data?.find((step) => step.proceso === 5);
-  const processSixData = data?.find((step) => step.proceso === 6);
+  const processOneData = data?.find((step) => step?.proceso === 1);
+  const processTwoData = data?.find((step) => step?.proceso === 2);
+  const processThreeData = data?.find((step) => step?.proceso === 3);
+  const processFourData = data?.find((step) => step?.proceso === 4);
+  const processFiveData = data?.find((step) => step?.proceso === 5);
+  const processSixData = data?.find((step) => step?.proceso === 6);
 
   const arraysld = { ldSideA, ldSideB, ldSideC, ldSideD };
   const arrayssd = { sdSideA, sdSideB, sdSideC, sdSideD };
@@ -214,7 +214,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
     productModel === "AK040" ||
     productModel === "AK060"
   ) {
-    foundIn = Object.entries(arraysld).find(([, arr]) => {
+    foundIn = Object?.entries(arraysld)?.find(([, arr]) => {
       if (zone === undefined) return false;
       return Array.isArray(zone)
         ? zone.some((z) => arr?.includes(z))
@@ -1577,7 +1577,6 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 marginLeft: "30px",
                 marginTop: "10px",
                 borderRadius: "5px",
-                opacity: "0.8",
               }}
               src="FinishGood.jpeg"
             />

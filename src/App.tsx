@@ -71,8 +71,6 @@ function App() {
     );
   }
 
-  console.log("Data encontrada: ", tagsProData);
-
   return (
     <div className="w-full justify-center items-center ">
       {/* <Header /> */}

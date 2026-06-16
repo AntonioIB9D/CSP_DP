@@ -16,7 +16,8 @@ type searchBoxProps = {
 export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
   const { register, handleSubmit } = useForm<SearchBox>();
 
-  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+  const firstBoxStep =
+    tagsProData && tagsProData.length > 0 ? tagsProData[0] : undefined;
 
   const onSubmit = (data: SearchBox) => {
     onSearch(data.boxId);
@@ -73,14 +74,18 @@ export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
                   : true
               }
             >
-              <PDFDownloadLink
-                document={<ReportPDF data={tagsProData} />}
-                fileName={`Report - ${firstBoxStep?.boxId}`}
-              >
-                <p>
-                  Report <i className="bi bi-download"></i>
-                </p>
-              </PDFDownloadLink>
+              {tagsProData &&
+              tagsProData.length > 0 &&
+              firstBoxStep?.proceso === 1 ? (
+                <PDFDownloadLink
+                  document={<ReportPDF data={tagsProData} />}
+                  fileName={`Report - ${firstBoxStep?.boxId}`}
+                >
+                  <p>
+                    Report <i className="bi bi-download"></i>
+                  </p>
+                </PDFDownloadLink>
+              ) : null}
             </Button>
           </div>
         </form>
