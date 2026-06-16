@@ -33,7 +33,7 @@ Font.register({
 // Styles
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#000000",
+    backgroundColor: "#FFFFFF",
   },
   textOrangeOne: {
     color: "#FF791B",
@@ -41,9 +41,10 @@ const styles = StyleSheet.create({
     fontFamily: "Outfit",
   },
   textNormal: {
-    color: "#D5D3D3",
+    color: "#0068FF",
     fontSize: "10px",
     fontFamily: "Outfit",
+    fontWeight: "bold",
   },
   imageModel: {
     width: "370px",
@@ -52,17 +53,17 @@ const styles = StyleSheet.create({
     marginTop: "30px",
   },
   imageDefectModel: {
-    width: "370px",
-    height: "220px",
+    width: "430px",
+    height: "280px",
     marginLeft: "110px",
     marginTop: "30px",
   },
   backgroundGray: {
-    backgroundColor: "#121214",
+    backgroundColor: "#6E6E6E",
     height: "300px",
   },
   textMedium: {
-    color: "#D5D3D3",
+    color: "#FFFFFF",
     fontWeight: "bold",
     fontSize: "18px",
     fontFamily: "Outfit",
@@ -573,6 +574,43 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             </View>
           </View>
         </View>
+
+        <View
+          style={[
+            styles.backgroundGray,
+            {
+              borderRadius: "15px",
+              marginTop: "5px",
+              marginLeft: "15px",
+              marginRight: "15px",
+              padding: "16px",
+              height: "100px",
+            },
+          ]}
+        >
+          <Text style={[styles.textMedium, { textAlign: "center" }]}>
+            Box ID
+          </Text>
+          <View
+            style={{
+              backgroundColor: "#000000",
+              borderRadius: "10px",
+              padding: "10px",
+              marginTop: "5px",
+            }}
+          >
+            <Text
+              style={{
+                color: "#D57F43",
+                fontFamily: "Outfit",
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              {firstBoxStep?.boxId}
+            </Text>
+          </View>
+        </View>
       </Page>
       {/* Product Registration Page */}
       <Page style={styles.page} size="A4">
@@ -593,7 +631,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
           </Text>
           <Text
             style={{
-              color: "#D5D3D3",
+              color: "#0068FF",
               textAlign: "center",
               fontWeight: "bold",
               fontSize: "25px",
@@ -623,12 +661,13 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 display: "flex",
                 width: "200px",
                 height: "200px",
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <View
               style={{
-                backgroundColor: "#171E2D",
+                backgroundColor: "#E0E0E0",
                 borderRadius: "5px",
                 padding: "4px",
               }}
@@ -652,7 +691,6 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 marginLeft: "30px",
                 marginTop: "10px",
                 borderRadius: "5px",
-                opacity: "0.6",
               }}
               src="Drill 2.jpeg"
             />
@@ -683,7 +721,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             >
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -696,7 +734,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
               </Text>
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -721,12 +759,13 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 display: "flex",
                 width: "200px",
                 height: "200px",
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <View
               style={{
-                backgroundColor: "#171E2D",
+                backgroundColor: "#E0E0E0",
                 borderRadius: "5px",
                 padding: "4px",
               }}
@@ -750,7 +789,6 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 marginLeft: "30px",
                 marginTop: "10px",
                 borderRadius: "5px",
-                opacity: "0.6",
               }}
               src="DrillExit.jpeg"
             />
@@ -781,7 +819,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             >
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -796,7 +834,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
               </Text>
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -820,12 +858,13 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 display: "flex",
                 width: "200px",
                 height: "200px",
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <View
               style={{
-                backgroundColor: "#171E2D",
+                backgroundColor: "#E0E0E0",
                 borderRadius: "5px",
                 padding: "4px",
               }}
@@ -849,9 +888,8 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 marginLeft: "30px",
                 marginTop: "10px",
                 borderRadius: "5px",
-                opacity: "0.6",
               }}
-              src="PaintEntrance.jpeg"
+              src="EntradaPaint.jpeg"
             />
 
             <Text
@@ -880,7 +918,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             >
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -895,7 +933,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
               </Text>
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -919,12 +957,13 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 display: "flex",
                 width: "200px",
                 height: "200px",
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <View
               style={{
-                backgroundColor: "#171E2D",
+                backgroundColor: "#E0E0E0",
                 borderRadius: "5px",
                 padding: "4px",
               }}
@@ -948,7 +987,6 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 marginLeft: "30px",
                 marginTop: "10px",
                 borderRadius: "5px",
-                opacity: "0.6",
               }}
               src="Paint Exit 2.jpeg"
             />
@@ -979,7 +1017,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             >
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -994,7 +1032,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
               </Text>
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -1018,12 +1056,13 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 display: "flex",
                 width: "200px",
                 height: "200px",
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <View
               style={{
-                backgroundColor: "#171E2D",
+                backgroundColor: "#E0E0E0",
                 borderRadius: "5px",
                 padding: "4px",
               }}
@@ -1047,7 +1086,6 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 marginLeft: "30px",
                 marginTop: "10px",
                 borderRadius: "5px",
-                opacity: "0.6",
               }}
               src="Assembly.jpeg"
             />
@@ -1078,7 +1116,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             >
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -1093,7 +1131,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
               </Text>
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -1117,12 +1155,13 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 display: "flex",
                 width: "200px",
                 height: "200px",
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <View
               style={{
-                backgroundColor: "#171E2D",
+                backgroundColor: "#E0E0E0",
                 borderRadius: "5px",
                 padding: "4px",
               }}
@@ -1146,7 +1185,6 @@ export default function ReportPDF({ data }: ReportPDFProps) {
                 marginLeft: "30px",
                 marginTop: "10px",
                 borderRadius: "5px",
-                opacity: "0.6",
               }}
               src="ShippingTape.jpeg"
             />
@@ -1177,7 +1215,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
             >
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -1192,7 +1230,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
               </Text>
               <Text
                 style={{
-                  color: "#778A96",
+                  color: "#3A404A",
                   fontSize: "10px",
                   fontFamily: "Outfit",
                   fontWeight: "bold",
@@ -1228,7 +1266,7 @@ export default function ReportPDF({ data }: ReportPDFProps) {
           </Text>
           <Text
             style={{
-              color: "#D5D3D3",
+              color: "#0068FF",
               textAlign: "center",
               fontWeight: "bold",
               fontSize: "25px",
