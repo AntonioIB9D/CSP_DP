@@ -21,12 +21,12 @@ import {
 
 Font.register({
   family: "Outfit",
-  src: "/src/fonts/OutfitVariant/Outfit-Regular.ttf", // ruta relativa o URL
+  src: "/OutfitVariant/Outfit-Regular.ttf", // ruta relativa o URL
 });
 
 Font.register({
   family: "Outfit",
-  src: "/src/fonts/OutfitVariant/Outfit-Bold.ttf",
+  src: "/OutfitVariant/Outfit-Bold.ttf",
   fontWeight: "bold",
 });
 
