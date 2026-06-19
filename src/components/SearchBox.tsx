@@ -63,20 +63,21 @@ export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
             >
               Search <i className="bi bi-search"></i>
             </Button>
-            <Button
-              className="h-8 flex justify-center items-center"
-              variant="danger-soft"
-              isDisabled={
-                tagsProData &&
-                tagsProData?.length > 0 &&
-                firstBoxStep?.proceso === 1
-                  ? false
-                  : true
-              }
-            >
-              {tagsProData &&
-              tagsProData.length > 0 &&
-              firstBoxStep?.proceso === 1 ? (
+
+            {tagsProData &&
+            tagsProData.length > 0 &&
+            firstBoxStep?.proceso === 1 ? (
+              <Button
+                className="h-8 flex justify-center items-center"
+                variant="danger-soft"
+                isDisabled={
+                  tagsProData &&
+                  tagsProData?.length > 0 &&
+                  firstBoxStep?.proceso === 1
+                    ? false
+                    : true
+                }
+              >
                 <PDFDownloadLink
                   document={<ReportPDF data={tagsProData} />}
                   fileName={`Report - ${firstBoxStep?.boxId}`}
@@ -85,8 +86,8 @@ export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
                     Report <i className="bi bi-download"></i>
                   </p>
                 </PDFDownloadLink>
-              ) : null}
-            </Button>
+              </Button>
+            ) : null}
           </div>
         </form>
       </div>

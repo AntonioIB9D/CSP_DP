@@ -13,7 +13,11 @@ export default function FactoryOption({
   return (
     <div className="bg-[#000000] rounded-2xl p-6 flex flex-col justify-center items-center gap-4">
       <div>
-        <h2 className="text-[#86868B]">{factoryOptionName}</h2>
+        <h2 className="text-[#86868B]">
+          {factoryOptionName === "Festoon SMC"
+            ? `${factoryOptionName} (Experimental)`
+            : factoryOptionName}
+        </h2>
       </div>
       {icon && <i className={`${icon} text-4xl`}></i>}
       <div>

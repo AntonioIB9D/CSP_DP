@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 
 type DefectsReportPros = {
   tagsProData: TagsData | null | undefined;
-  productModel:
+  productModel?:
     | "AK050"
     | "AK030"
     | "AK010"
@@ -72,8 +72,6 @@ export default function DefectsReport({
         ? zone.some((z) => arr?.includes(z))
         : arr?.includes(zone);
     });
-  } else {
-    return null;
   }
 
   const boxImage =

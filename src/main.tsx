@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { Buffer } from "buffer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.css";
+import { Toaster } from "sonner";
 
 window.Buffer = Buffer;
 
@@ -13,6 +14,7 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
+    <Toaster />
     <App />
   </QueryClientProvider>,
 );

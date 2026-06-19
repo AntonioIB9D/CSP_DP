@@ -31,6 +31,8 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
   const processFiveData = firstBoxStep?.find((step) => step.proceso === 5);
   const processSixData = firstBoxStep?.find((step) => step.proceso === 6);
 
+  console.log("Entre al process register");
+
   return (
     <div className="text-center">
       <div className="mt-28">
