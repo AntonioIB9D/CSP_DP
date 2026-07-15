@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import LeftPanel from "./components/LeftPanel";
 import RightPanel from "./components/RightPanel";
@@ -11,7 +11,7 @@ import { fetchTagsProData } from "./services/TagsProService";
 import ProcessRegister from "./pages/ProcessRegister";
 import { Spinner } from "@heroui/react";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
+import SearchFestoon from "./components/SearchFestoon";
 
 function App() {
   const [boxId, setBoxId] = useState<string>("");
@@ -21,7 +21,6 @@ function App() {
     data: tagsProData,
     isLoading,
     isFetching,
-    isError,
   } = useQuery({
     queryKey: ["tagsProData", boxId],
     queryFn: () => fetchTagsProData(Number(boxId)),
@@ -29,12 +28,6 @@ function App() {
   });
 
   const firstBoxStep = tagsProData ? tagsProData[0] : null;
-
-  useEffect(() => {
-    if (isError) {
-      toast.error("There is not information about this product!");
-    }
-  }, [isError]);
 
   const ak050 =
     firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");
@@ -78,8 +71,6 @@ function App() {
       </div>
     );
   }
-
-  console.log("Data: ", tagsProData);
 
   return (
     <div className="w-full justify-center items-center ">
@@ -130,38 +121,12 @@ function App() {
             </section>
           )}
         </>
-      ) : tagsProData &&
-        tagsProData?.length > 0 &&
-        firstBoxStep?.proceso !== 1 ? (
+      ) : (tagsProData && tagsProData?.length > 0) ||
+        (tagsProData?.length === 0 && firstBoxStep?.proceso !== 1) ? (
         <>
-          {console.log("Entre aquí")}
           <section className="flex justify-evenly items-center min-h-screen">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <LeftPanel tagsProData={tagsProData} />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <RightPanel tagsProData={tagsProData} />
-            </motion.div>
-          </section>
-          <section className="flex justify-evenly items-center min-h-[70vh]">
-            <ProcessRegister tagsProData={tagsProData} />
-          </section>
-          <section className="flex justify-evenly items-center min-h-[70vh]">
-            <DefectsReport
-              tagsProData={tagsProData}
-              productModel={productModel}
-            />
+            {/*  */}
+            <SearchFestoon boxId={boxId} />
           </section>
         </>
       ) : (
@@ -243,13 +208,13 @@ function App() {
               <img
                 src="/Drill Entrance Edited.png"
                 alt="Data Illustration"
-                className="w-230 h-165 rounded-none blur-[2px] opacity-65 lg:flex hidden"
+                className="w-210 h-145 rounded-none blur-[2px] opacity-65 lg:flex hidden"
               />
             </div>
           </div>
         </>
       )}
-      <div className="w-full mt-2 text-[#7E8A9B] italic">
+      <div className="w-full text-[#7E8A9B] italic">
         CSP DP v2.1b powered by <b>IT Department</b> ©
       </div>
     </div>

@@ -25,3 +25,8 @@ const TagSchema = z.object({
 export const TagsResponseSchema = z.array(TagSchema);
 
 export type TagsData = z.infer<typeof TagsResponseSchema>;
+
+export const FestoonData = z.object({
+  supplierName: z.string(),
+  serie: z.string(),
+});

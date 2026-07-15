@@ -43,7 +43,7 @@ export default function LeftPanel({ tagsProData }: LeftPanelPros) {
 
   return (
     <div className="flex flex-col gap-4">
-      {productModel !== "Not assigned" ? (
+      {productModel !== "Not assigned" && (
         <div className="text-center">
           <h1 className="text-4xl font-bold text-[#FF791B]">Product</h1>
           <p className="text-[#D5D3D3]">
@@ -58,23 +58,15 @@ export default function LeftPanel({ tagsProData }: LeftPanelPros) {
                     : "This product contains all window cutouts (5)"}
           </p>
         </div>
-      ) : (
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-[#FF791B]">Ooops...</h1>
-        </div>
       )}
       <div className="flex justify-center items-center">
-        {productModel !== "Not assigned" ? (
+        {productModel !== "Not assigned" && (
           <img
             src={`/Product Models/${productModel}.png`}
             alt="MDN"
             width={700}
             height={700}
           />
-        ) : (
-          <div className="flex flex-col gap-4 justify-center items-center">
-            <p>We can't determine what kind of product this is</p>
-          </div>
         )}
       </div>
     </div>

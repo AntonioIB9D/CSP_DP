@@ -96,8 +96,9 @@ export default function RightPanel({ tagsProData }: RightPanelPros) {
               : productModel === "AK060"
                 ? "9"
                 : "-";
+  console.log("firstBoxStep: ", firstBoxStep?.proceso === 1);
 
-  return (
+  return firstBoxStep?.proceso === 1 ? (
     <div className="flex justify-center">
       <div className="bg-[#121214] p-4 rounded-2xl w-full">
         <div className="flex w-full justify-end">
@@ -151,5 +152,7 @@ export default function RightPanel({ tagsProData }: RightPanelPros) {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 }
