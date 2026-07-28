@@ -1,36 +1,38 @@
-/* import { Progress } from "@heroui/react";
-import { useMediaQuery } from "@react-hook/media-query"; */
-/* import type { TooltipProps } from "recharts"; */
+import { ProgressBar } from "@heroui/react";
+import { useMediaQuery } from "@react-hook/media-query";
+import type { TooltipProps } from "recharts";
 
-/* type NormalizedRow = {
+type NormalizedRow = {
   name: number;
   // cada ciclo tendrá su valor numérico
   [cycle: string]: number | string | null;
-}; */
+};
 
-/* type CustomPayloadEntry = {
+type CustomPayloadEntry = {
   dataKey?: string;
   name?: string;
   value?: number;
   color?: string;
   payload: NormalizedRow; // 👈 aquí decimos que payload es tu fila completa
-}; */
+  boxId: string;
+};
 
-/* export const CustomTooltip: React.FC<
+export const CustomTooltip: React.FC<
   TooltipProps<number, string> & {
     payload?: CustomPayloadEntry[];
     label?: string | number;
     max: number;
     min: number;
     prom: number;
-  } */
-/* > = ( props) => { */
-/*  const { active, payload, label, max, min, prom } = props; */
-/*  const isMobile = useMediaQuery("(max-width: 900px)"); */
+    boxId: string;
+  }
+> = (props) => {
+  const { active, payload, label, max, boxId } = props;
+  const isMobile = useMediaQuery("(max-width: 900px)");
 
-/* if (active && payload && payload.length) { */
-/*   return { */
-/* <div
+  if (active && payload && payload.length) {
+    return (
+      <div
         className={`bg-[#15181E] rounded-3xl shadow-md text-white flex flex-col gap-1 border-2 border-[#21242C] ${isMobile ? "w-34" : "w-100"}`}
       >
         <div className="flex items-center gap-4 p-2 border-b-2 border-[#21242C]">
@@ -42,33 +44,11 @@ import { useMediaQuery } from "@react-hook/media-query"; */
             <p className="text-[#949A9C] text-sm">Point #{label}</p>
           </div>
         </div>
-        {!isMobile ? (
-          <div className="flex justify-between pl-2 pr-2 pt-1 pb-1 border-b-2 border-[#21242C] gap-2">
-            <div className="flex items-center gap-2">
-              <i className="bi bi-bar-chart-line text-sm text-[#949A9C]"></i>
-              <p className="text-sm text-[#949A9C]">AVG</p>
-              <p className="text-sm text-white font-bold">{prom.toFixed(2)}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <i className="bi bi-arrow-up-short text-sm text-[#28A745]"></i>
-              <p className="text-sm text-[#949A9C]">MAX</p>
-              <p className="text-sm text-white font-bold">{max}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <i className="bi bi-arrow-down-short text-sm text-[#D22D25]"></i>
-              <p className="text-sm text-[#949A9C]">MIN</p>
-              <p className="text-sm text-white font-bold">{min}</p>
-            </div>
-          </div>
-        ) : null}
+
         <div className="w-full flex flex-col">
-          <div className="w-full flex justify-end gap-3 pr-2">
-            <div className="text-sm text-[#949A9C]">
-              <i className="bi bi-clock"></i> Start
-            </div>
-            <div className="text-sm text-[#949A9C]">
-              <i className="bi bi-clock-history"></i> End
-            </div>
+          <div className="w-full flex justify-between gap-6 pr-2">
+            <div className="text-sm text-[#949A9C] ml-4">Box Id</div>
+            <div className="text-sm text-[#949A9C]">Value</div>
           </div>
           <div className="flex flex-col gap-1 p-2">
             {payload.map((entry: (typeof payload)[0]) => (
@@ -76,37 +56,28 @@ import { useMediaQuery } from "@react-hook/media-query"; */
                 key={entry.dataKey}
                 className="flex justify-between items-center"
               >
-                <div
+                {/* <div
                   className={`rounded-full w-3 h-3 ${entry.color === "#F31260" ? "bg-[#F31260]" : entry.color === "#17C964" ? "bg-[#17C964]" : entry.color === "#F5A524" ? "bg-[#F5A524]" : entry.color === "#FF56AD" ? "bg-[#FF56AD]" : "bg-[#006FEE]"}`}
-                ></div>
-                <p className="text-sm text-[#949A9C] ">{entry.name}</p>
+                ></div> */}
+                <p className="text-sm text-[#949A9C] ">
+                  {/* {entry.name} */} {boxId}
+                </p>
                 {!isMobile ? (
-                  <Progress
-                    aria-label="Loading..."
-                    className="w-32"
-                    size="md"
+                  <ProgressBar
+                    aria-label="Loading"
+                    className="w-40"
                     value={entry.value}
                     maxValue={max}
-                    color={
-                      entry.color === "#F31260"
-                        ? "danger"
-                        : entry.color === "#17C964"
-                          ? "success"
-                          : entry.color === "#F5A524"
-                            ? "warning"
-                            : entry.color === "#FF56AD"
-                              ? "secondary"
-                              : "primary"
-                    }
-                    classNames={{
-                      indicator:
-                        entry.color === "#FF56AD" ? "bg-[#FF56AD]" : "",
-                    }}
-                  />
+                  >
+                    {/* <ProgressBar.Output /> */}
+                    <ProgressBar.Track>
+                      <ProgressBar.Fill />
+                    </ProgressBar.Track>
+                  </ProgressBar>
                 ) : null}
 
                 <p className="text-white font-bold">{entry.value}</p>
-                <p>{`${
+                {/*  <p>{`${
                   entry.payload?.[`${entry.dataKey}_inicio`]
                     ? (
                         entry.payload?.[`${entry.dataKey}_inicio`] as string
@@ -120,14 +91,13 @@ import { useMediaQuery } from "@react-hook/media-query"; */
                         entry.payload?.[`${entry.dataKey}_final`] as string
                       ).substring(0, 5)
                     : "-"
-                }`}</p>
+                }`}</p> */}
               </div>
             ))}
           </div>
         </div>
-      </div> */
-
-/*   }; */
-/*   } */
-/* return null; */
-/* }; */
+      </div>
+    );
+  }
+  return null;
+};

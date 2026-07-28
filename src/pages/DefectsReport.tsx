@@ -44,7 +44,7 @@ export default function DefectsReport({
   tagsProData,
   productModel,
 }: DefectsReportPros) {
-  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+  const firstBoxStep = tagsProData?.data ? tagsProData.data[0] : null;
   const zone = firstBoxStep?.zona;
   const arraysld = { ldSideA, ldSideB, ldSideC, ldSideD };
   const arrayssd = { sdSideA, sdSideB, sdSideC, sdSideD };

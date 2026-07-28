@@ -24,8 +24,6 @@ export const fetchFestoonByHour = async (
   confirmedDate: string,
 ) => {
   try {
-    console.log("ConfirmedHour: ", confirmedHour);
-    console.log("Entre a fetchFestoon");
     const { data } = await axiosInstance.get(
       `/tags-prod/festoon/${pressNumber}/${confirmedHour}/${confirmedDate}`,
     );

@@ -90,14 +90,21 @@ const styles = StyleSheet.create({
     borderRadius: "15px",
     padding: "12px",
   },
+  chartImage: {
+    width: "100%",
+    height: 220,
+    objectFit: "contain",
+    marginVertical: 15,
+  },
 });
 
 type ReportPDFProps = {
   data: TagsData | null | undefined;
+  chartImages?: Record<string, string>;
 };
 
-export default function ReportPDF({ data }: ReportPDFProps) {
-  const firstBoxStep = data ? data[0] : null;
+export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
+  const firstBoxStep = data?.data ? data.data[0] : null;
 
   const ak050 =
     firstBoxStep?.product[0] && firstBoxStep?.product[0]?.includes("AK050");
@@ -198,12 +205,12 @@ export default function ReportPDF({ data }: ReportPDFProps) {
 
   const zone = firstBoxStep?.zona;
 
-  const processOneData = data?.find((step) => step?.proceso === 1);
-  const processTwoData = data?.find((step) => step?.proceso === 2);
-  const processThreeData = data?.find((step) => step?.proceso === 3);
-  const processFourData = data?.find((step) => step?.proceso === 4);
-  const processFiveData = data?.find((step) => step?.proceso === 5);
-  const processSixData = data?.find((step) => step?.proceso === 6);
+  const processOneData = data?.data?.find((step) => step?.proceso === 1);
+  const processTwoData = data?.data?.find((step) => step?.proceso === 2);
+  const processThreeData = data?.data?.find((step) => step?.proceso === 3);
+  const processFourData = data?.data?.find((step) => step?.proceso === 4);
+  const processFiveData = data?.data?.find((step) => step?.proceso === 5);
+  const processSixData = data?.data?.find((step) => step?.proceso === 6);
 
   const arraysld = { ldSideA, ldSideB, ldSideC, ldSideD };
   const arrayssd = { sdSideA, sdSideB, sdSideC, sdSideD };
@@ -610,6 +617,74 @@ export default function ReportPDF({ data }: ReportPDFProps) {
               {firstBoxStep?.boxId}
             </Text>
           </View>
+        </View>
+      </Page>
+      {/* Product Parameters Page */}
+      <Page style={styles.page} size="A4">
+        <View>
+          <Text
+            style={[
+              styles.textOrangeOne,
+              {
+                textAlign: "center",
+                marginTop: "50px",
+                fontWeight: "bold",
+                fontSize: "15px",
+                fontFamily: "Outfit",
+              },
+            ]}
+          >
+            Molding parameters{" "}
+            <Text
+              style={{
+                textAlign: "center",
+                marginTop: "50px",
+                fontWeight: "bold",
+                fontSize: "15px",
+                fontFamily: "Outfit",
+                color: "#86868B",
+              }}
+            >
+              (Experimental)
+            </Text>
+          </Text>
+          <Text
+            style={{
+              color: "#0068FF",
+              textAlign: "center",
+              fontWeight: "bold",
+              fontSize: "25px",
+              fontFamily: "Outfit",
+            }}
+          >
+            Parameters at your disposal
+          </Text>
+        </View>
+        <View style={{ marginTop: 20 }}>
+          {/* Muestra la gráfica si existe en el objeto capturado */}
+          {chartImages?.["Platen Tonnage"] && (
+            <View>
+              <Image src={chartImages["Platen Tonnage"]} />
+            </View>
+          )}
+
+          {chartImages?.["Shroud Vacuum"] && (
+            <View>
+              <Image src={chartImages["Shroud Vacuum"]} />
+            </View>
+          )}
+
+          {chartImages?.["Platen Referenced Position"] && (
+            <View>
+              <Image src={chartImages["Platen Referenced Position"]} />
+            </View>
+          )}
+
+          {chartImages?.["Tank Vacuum"] && (
+            <View>
+              <Image src={chartImages["Tank Vacuum"]} />
+            </View>
+          )}
         </View>
       </Page>
       {/* Product Registration Page */}

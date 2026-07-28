@@ -5,7 +5,7 @@ type LeftPanelPros = {
 };
 
 export default function LeftPanel({ tagsProData }: LeftPanelPros) {
-  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+  const firstBoxStep = tagsProData?.data ? tagsProData.data[0] : null;
 
   const ak050 =
     firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");

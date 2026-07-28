@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import LeftPanel from "./components/LeftPanel";
 import RightPanel from "./components/RightPanel";
 import SearchBox from "./components/SearchBox";
 import DefectsReport from "./pages/DefectsReport";
-import PressData from "./pages/PressData";
+import PressData, { type PressDataRef } from "./pages/PressData";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTagsProData } from "./services/TagsProService";
-/* import { DotLottieReact } from "@lottiefiles/dotlottie-react"; */
 import ProcessRegister from "./pages/ProcessRegister";
 import { Spinner } from "@heroui/react";
 import { motion } from "framer-motion";
@@ -15,6 +14,9 @@ import SearchFestoon from "./components/SearchFestoon";
 
 function App() {
   const [boxId, setBoxId] = useState<string>("");
+
+  // 1. Ref hacia PressData
+  const pressDataRef = useRef<PressDataRef>(null);
 
   // Si hay un BoxId podemos hacer la consulta a la API y mostrar los datos en los componentes correspondientes
   const {
@@ -27,7 +29,8 @@ function App() {
     enabled: !!boxId, // Solo ejecutar la consulta si boxId no es vacío
   });
 
-  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+  const firstBoxStep = tagsProData?.data ? tagsProData.data[0] : null;
+  const pressNumber = boxId.split("")[0];
 
   const ak050 =
     firstBoxStep?.product[0] && firstBoxStep?.product[0].includes("AK050");
@@ -63,6 +66,16 @@ function App() {
                 ? "AK020"
                 : "Not assigned";
 
+  // 2. Función puente que llamará SearchBox
+  const handlePrepareReportImages = async (): Promise<
+    Record<string, string>
+  > => {
+    if (pressDataRef.current) {
+      return await pressDataRef.current.getReportImages();
+    }
+    return {};
+  };
+
   if (isLoading || isFetching) {
     return (
       <div className="flex flex-col items-center gap-2 min-h-screen justify-center">
@@ -72,15 +85,31 @@ function App() {
     );
   }
 
+  const hasData =
+    Array.isArray(tagsProData?.data) && tagsProData.data.length > 0;
+  // CASO 1: Hay datos y el proceso es 1
+  const isProcessOne = hasData && firstBoxStep?.proceso === 1;
+  // CASO 2: Se realizó una búsqueda (boxId existe), la API respondió, pero NO trajo datos (o el proceso no es 1)
+  const isFestoonCase =
+    !isLoading &&
+    !isFetching &&
+    !!boxId &&
+    !isProcessOne &&
+    (!hasData || firstBoxStep?.proceso !== 1);
+
   return (
     <div className="w-full justify-center items-center ">
       {/* <Header /> */}
       <section
         className={`${productModel !== "Not assigned" ? "mt-12" : "mt-6"} flex min-h-full w-full justify-center -mb-20 sticky top-6 z-50`}
       >
-        <SearchBox onSearch={setBoxId} tagsProData={tagsProData} />
+        <SearchBox
+          onSearch={setBoxId}
+          tagsProData={tagsProData}
+          onPrepareReportImages={handlePrepareReportImages}
+        />
       </section>
-      {tagsProData && tagsProData.length > 0 && firstBoxStep?.proceso === 1 ? (
+      {isProcessOne ? (
         <>
           <section className="flex justify-evenly items-center min-h-screen">
             <motion.div
@@ -104,7 +133,12 @@ function App() {
 
           {productModel !== "Not assigned" && (
             <section className="flex flex-col justify-start min-h-screen text-center">
-              <PressData />
+              <PressData
+                ref={pressDataRef}
+                tagsProData={tagsProData}
+                pressNumber={pressNumber}
+                boxId={boxId}
+              />
             </section>
           )}
           {productModel !== "Not assigned" && (
@@ -121,8 +155,7 @@ function App() {
             </section>
           )}
         </>
-      ) : (tagsProData && tagsProData?.length > 0) ||
-        (tagsProData?.length === 0 && firstBoxStep?.proceso !== 1) ? (
+      ) : isFestoonCase ? (
         <>
           <section className="flex justify-evenly items-center min-h-screen">
             {/*  */}

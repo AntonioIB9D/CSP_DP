@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import type { TagsData } from "../schemas/tagsPro.schema";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import ReportPDF from "./ReportPDF";
+import { useState } from "react";
 
 type SearchBox = {
   boxId: string;
@@ -11,17 +12,48 @@ type SearchBox = {
 type searchBoxProps = {
   onSearch: (boxId: string) => void;
   tagsProData: TagsData | null | undefined;
+  onPrepareReportImages?: () => Promise<Record<string, string>>;
 };
 
-export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
+export default function SearchBox({
+  onSearch,
+  tagsProData,
+  onPrepareReportImages,
+}: searchBoxProps) {
   const { register, handleSubmit } = useForm<SearchBox>();
 
+  // Estado para guardar las imágenes Base64 capturadas
+  const [chartImages, setChartImages] = useState<Record<string, string> | null>(
+    null,
+  );
+  const [isPreparing, setIsPreparing] = useState(false);
+
   const firstBoxStep =
-    tagsProData && tagsProData.length > 0 ? tagsProData[0] : undefined;
+    tagsProData?.data && tagsProData?.data.length > 0
+      ? tagsProData.data[0]
+      : undefined;
 
   const onSubmit = (data: SearchBox) => {
     onSearch(data.boxId);
   };
+
+  const handlePrepareReport = async () => {
+    if (!onPrepareReportImages) return;
+    setIsPreparing(true);
+    try {
+      const images = await onPrepareReportImages();
+      setChartImages(images);
+    } catch (error) {
+      console.error("Error capturando las gráficas:", error);
+    } finally {
+      setIsPreparing(false);
+    }
+  };
+
+  const isReportAvailable =
+    tagsProData?.data &&
+    tagsProData?.data?.length > 0 &&
+    firstBoxStep?.proceso === 1;
 
   return (
     <div className="bg-[#141414] opacity-95 rounded-3xl pr-4 pl-4 pt-2 pb-2 flex flex-row justify-between items-center w-1/2 border-2 border-[#282828]">
@@ -64,30 +96,49 @@ export default function SearchBox({ onSearch, tagsProData }: searchBoxProps) {
               Search <i className="bi bi-search"></i>
             </Button>
 
-            {tagsProData &&
-            tagsProData.length > 0 &&
-            firstBoxStep?.proceso === 1 ? (
-              <Button
-                className="h-8 flex justify-center items-center"
-                variant="danger-soft"
-                isDisabled={
-                  tagsProData &&
-                  tagsProData?.length > 0 &&
-                  firstBoxStep?.proceso === 1
-                    ? false
-                    : true
-                }
-              >
-                <PDFDownloadLink
-                  document={<ReportPDF data={tagsProData} />}
-                  fileName={`Report - ${firstBoxStep?.boxId}`}
-                >
-                  <p>
-                    Report <i className="bi bi-download"></i>
-                  </p>
-                </PDFDownloadLink>
-              </Button>
-            ) : null}
+            {isReportAvailable && (
+              <>
+                {!chartImages ? (
+                  // PASO 1: Botón para ejecutar la captura a Base64
+                  <Button
+                    type="button"
+                    className="h-8 flex justify-center items-center"
+                    variant="danger-soft"
+                    isDisabled={isPreparing}
+                    onClick={handlePrepareReport}
+                  >
+                    <p className="flex items-center gap-1">
+                      {isPreparing ? "Preparing..." : "Prepare Report"}{" "}
+                      <i className="bi bi-file-earmark-pdf"></i>
+                    </p>
+                  </Button>
+                ) : (
+                  // PASO 2: Botón con PDFDownloadLink una vez que las imágenes existen
+                  <Button
+                    type="button"
+                    className="h-8 flex justify-center items-center"
+                    variant="danger-soft"
+                  >
+                    <PDFDownloadLink
+                      document={
+                        <ReportPDF
+                          data={tagsProData}
+                          chartImages={chartImages}
+                        />
+                      }
+                      fileName={`Report - ${firstBoxStep?.boxId}.pdf`}
+                    >
+                      {({ loading }) => (
+                        <p className="flex items-center gap-1">
+                          {loading ? "Generating..." : "Download Report"}{" "}
+                          <i className="bi bi-download"></i>
+                        </p>
+                      )}
+                    </PDFDownloadLink>
+                  </Button>
+                )}
+              </>
+            )}
           </div>
         </form>
       </div>

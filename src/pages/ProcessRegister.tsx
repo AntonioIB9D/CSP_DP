@@ -22,7 +22,7 @@ const itemVariants = {
 };
 
 export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
-  const firstBoxStep = tagsProData ? tagsProData : null;
+  const firstBoxStep = tagsProData?.data ? tagsProData.data : null;
 
   const processOneData = firstBoxStep?.find((step) => step.proceso === 1);
   const processTwoData = firstBoxStep?.find((step) => step.proceso === 2);
@@ -30,8 +30,6 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
   const processFourData = firstBoxStep?.find((step) => step.proceso === 4);
   const processFiveData = firstBoxStep?.find((step) => step.proceso === 5);
   const processSixData = firstBoxStep?.find((step) => step.proceso === 6);
-
-  console.log("Entre al process register");
 
   return (
     <div className="text-center">

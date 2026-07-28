@@ -6,7 +6,7 @@ type RightPanelPros = {
 };
 
 export default function RightPanel({ tagsProData }: RightPanelPros) {
-  const firstBoxStep = tagsProData ? tagsProData[0] : null;
+  const firstBoxStep = tagsProData?.data ? tagsProData.data[0] : null;
 
   const cavidad = firstBoxStep?.cavidad[0] || "-";
 
@@ -96,7 +96,6 @@ export default function RightPanel({ tagsProData }: RightPanelPros) {
               : productModel === "AK060"
                 ? "9"
                 : "-";
-  console.log("firstBoxStep: ", firstBoxStep?.proceso === 1);
 
   return firstBoxStep?.proceso === 1 ? (
     <div className="flex justify-center">
