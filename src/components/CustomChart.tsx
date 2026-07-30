@@ -109,7 +109,7 @@ const CustomChart = forwardRef<CustomChartRef, CustomChartProps>(
       : { max: 0, min: 0, avg: 0 };
 
     return (
-      <div ref={chartContainerRef} className="p-4 bg-[#141414] rounded-xl">
+      <>
         <div className="flex gap-4 mt-10 ml-8">
           <div className="bg-[#1E2229] p-4 rounded-2xl w-16 h-16">
             {iconType === "tonnage" ? (
@@ -127,43 +127,48 @@ const CustomChart = forwardRef<CustomChartRef, CustomChartProps>(
             <p className="text-[#7E8A9A] font-bold">{codeChart}</p>
           </div>
         </div>
-        <div className="flex justify-evenly items-center mr-8">
-          <ResponsiveContainer width="85%" height={500}>
-            <AreaChart
-              data={chartData ? chartData : []} // Usamos solo el primer grupo de datos para el chart
-              margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
-            >
-              <defs>
-                {/* <linearGradient id="gradientValue" x1="0" y1="0" x2="0" y2="1">
+        <div ref={chartContainerRef} className="p-4 rounded-xl">
+          <div className="flex justify-evenly items-center mr-8">
+            <ResponsiveContainer width="85%" height={500}>
+              <AreaChart
+                data={chartData ? chartData : []} // Usamos solo el primer grupo de datos para el chart
+                margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+              >
+                <defs>
+                  {/* <linearGradient id="gradientValue" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#34d399" stopOpacity={0.3} />{" "} */}
-                {/* verde */}
-                {/*  <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
+                  {/* verde */}
+                  {/*  <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
             </linearGradient> */}
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,14%,18%)" />
-              <XAxis dataKey="name" />
-              <YAxis
-                domain={
-                  pressNumber === "1" && chartName === "Platen Tonnage"
-                    ? [0, 3500]
-                    : pressNumber === "2" && chartName === "Platen Tonnage"
+                </defs>
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="hsl(220,14%,18%)"
+                />
+                <XAxis dataKey="name" />
+                <YAxis
+                  domain={
+                    pressNumber === "1" && chartName === "Platen Tonnage"
                       ? [0, 3500]
-                      : pressNumber === "3" && chartName === "Platen Tonnage"
-                        ? [0, 4000]
-                        : [0, "auto"]
-                }
-              />
-              <Tooltip
-                content={
-                  <CustomTooltip
-                    max={stats.max}
-                    min={stats.min}
-                    prom={stats.avg}
-                    boxId={boxId}
-                  />
-                }
-              />
-              {/*    <Legend
+                      : pressNumber === "2" && chartName === "Platen Tonnage"
+                        ? [0, 3500]
+                        : pressNumber === "3" && chartName === "Platen Tonnage"
+                          ? [0, 4000]
+                          : [0, "auto"]
+                  }
+                />
+                <Tooltip
+                  content={
+                    <CustomTooltip
+                      max={stats.max}
+                      min={stats.min}
+                      prom={stats.avg}
+                      boxId={boxId}
+                      chartName={chartName}
+                    />
+                  }
+                />
+                {/*    <Legend
             iconType="none"
             onClick={(e) => {
               if (typeof e.dataKey === "string") {
@@ -185,55 +190,66 @@ const CustomChart = forwardRef<CustomChartRef, CustomChartProps>(
               </span>
             )}
           /> */}
-              <Area
-                type="monotone"
-                dataKey="Cycle 1" // Usamos el primer valor del array para el dataKey
-                stroke="#F31260"
-                fill="url(#gradientValue)"
-                strokeWidth={2}
-                /* hide={!activeCycles.includes("Cycle 1")} */
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-          <div className="flex flex-col justify-evenly gap-16 h-full">
-            <div className="flex flex-col gap-2 p-2">
-              <p className="font-bold text-[#86868B]">
-                {chartName === "Platen Tonnage"
-                  ? " Max tonnage used"
-                  : chartName === "Shroud Vacuum"
-                    ? "Max inHg used"
-                    : chartName === "Platen Referenced Position"
-                      ? "Max mm used"
-                      : "Max inHg used"}
-              </p>
-              <span className="text-[#FF791B] text-3xl font-bold">
-                {stats.max}
-                <span className="text-[#FF791B] text-sm">
+                <Area
+                  type="monotone"
+                  dataKey="Cycle 1" // Usamos el primer valor del array para el dataKey
+                  stroke={
+                    chartName === "Platen Tonnage"
+                      ? "#0068FF"
+                      : chartName === "Shroud Vacuum"
+                        ? "#DC3545"
+                        : chartName === "Platen Referenced Position"
+                          ? "#28A745"
+                          : "#FF6A32"
+                  }
+                  /* stroke="#F31260" */
+                  fill="url(#gradientValue)"
+                  strokeWidth={3}
+                  /* hide={!activeCycles.includes("Cycle 1")} */
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+            <div className="flex flex-col justify-evenly gap-16 h-full">
+              <div className="flex flex-col gap-2 p-2">
+                <p className="font-bold text-[#86868B]">
                   {chartName === "Platen Tonnage"
-                    ? "Tons"
+                    ? " Max tonnage used"
                     : chartName === "Shroud Vacuum"
-                      ? "inHg"
+                      ? "Max inHg used"
                       : chartName === "Platen Referenced Position"
-                        ? "mm"
-                        : "inHg"}
+                        ? "Max mm used"
+                        : "Max inHg used"}
+                </p>
+                <span className="text-[#FF791B] text-3xl font-bold">
+                  {stats.max}
+                  <span className="text-[#FF791B] text-sm">
+                    {chartName === "Platen Tonnage"
+                      ? "Tons"
+                      : chartName === "Shroud Vacuum"
+                        ? "inHg"
+                        : chartName === "Platen Referenced Position"
+                          ? "mm"
+                          : "inHg"}
+                  </span>
                 </span>
-              </span>
-            </div>
-            <div className="flex flex-col gap-2 p-2">
-              <p className="font-bold text-[#86868B]">Molding time start</p>
-              <span className="text-[#FF791B] text-3xl font-bold">
-                {`${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`} a.m.
-              </span>
-            </div>
-            <div className="flex flex-col gap-2 p-2">
-              <p className="font-bold text-[#86868B]">Molding time end</p>
-              <span className="text-[#FF791B] text-3xl font-bold">
-                {`${endTime?.split(":")[0]}:${endTime?.split(":")[1]}`} a.m.
-              </span>
+              </div>
+              <div className="flex flex-col gap-2 p-2">
+                <p className="font-bold text-[#86868B]">Molding time start</p>
+                <span className="text-[#FF791B] text-3xl font-bold">
+                  {`${startTime?.split(":")[0]}:${startTime?.split(":")[1]}`}{" "}
+                  a.m.
+                </span>
+              </div>
+              <div className="flex flex-col gap-2 p-2">
+                <p className="font-bold text-[#86868B]">Molding time end</p>
+                <span className="text-[#FF791B] text-3xl font-bold">
+                  {`${endTime?.split(":")[0]}:${endTime?.split(":")[1]}`} a.m.
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   },
 );

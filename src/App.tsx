@@ -29,6 +29,8 @@ function App() {
     enabled: !!boxId, // Solo ejecutar la consulta si boxId no es vacío
   });
 
+  console.log("tagsProData: ", tagsProData);
+
   const firstBoxStep = tagsProData?.data ? tagsProData.data[0] : null;
   const pressNumber = boxId.split("")[0];
 
@@ -157,9 +159,16 @@ function App() {
         </>
       ) : isFestoonCase ? (
         <>
-          <section className="flex justify-evenly items-center min-h-screen">
+          <section>
             {/*  */}
-            <SearchFestoon boxId={boxId} />
+            <div className="flex flex-col justify-evenly items-center w-full min-h-screen">
+              <SearchFestoon boxId={boxId} tagsProData={tagsProData} />
+            </div>
+            {tagsProData?.data !== undefined ? (
+              <div>
+                <ProcessRegister tagsProData={tagsProData} />
+              </div>
+            ) : null}
           </section>
         </>
       ) : (
@@ -247,7 +256,7 @@ function App() {
           </div>
         </>
       )}
-      <div className="w-full text-[#7E8A9B] italic">
+      <div className="w-full text-[#7E8A9B] italic -mt-6">
         CSP DP v2.1b powered by <b>IT Department</b> ©
       </div>
     </div>

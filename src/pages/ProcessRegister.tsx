@@ -48,7 +48,7 @@ export default function ProcessRegister({ tagsProData }: ProcessRegisterPros) {
           </h1>
         </motion.div>
       </div>
-      <div className="flex justify-evenly items-center gap-12 min-h-screen">
+      <div className="flex justify-evenly items-center gap-12 min-h-[80vh]">
         <motion.div
           className="flex justify-center gap-8 overflow-x-auto max-w-400 overflow-y-hidden py-4"
           variants={containerVariants}

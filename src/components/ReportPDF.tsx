@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: "#FFFFFF",
   },
+  pageBlack: {
+    backgroundColor: "#0D1117",
+  },
   textOrangeOne: {
     color: "#FF791B",
     fontSize: "25px",
@@ -294,6 +297,9 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
             style={styles.imageModel}
             src={`/Product Models/${productModel}.png`}
           />
+          <Text style={[styles.smallText, { textAlign: "center" }]}>
+            Reference Image (Can be different for a model: GT or BC)
+          </Text>
         </View>
 
         <View
@@ -620,7 +626,7 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
         </View>
       </Page>
       {/* Product Parameters Page */}
-      <Page style={styles.page} size="A4">
+      <Page style={styles.pageBlack} size="A4" orientation="landscape">
         <View>
           <Text
             style={[
@@ -650,7 +656,7 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
           </Text>
           <Text
             style={{
-              color: "#0068FF",
+              color: "#FFFFFF",
               textAlign: "center",
               fontWeight: "bold",
               fontSize: "25px",
@@ -660,32 +666,175 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
             Parameters at your disposal
           </Text>
         </View>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 40 }}>
           {/* Muestra la gráfica si existe en el objeto capturado */}
           {chartImages?.["Platen Tonnage"] && (
             <View>
+              <Text
+                style={[
+                  styles.textOrangeOne,
+                  {
+                    marginLeft: "50px",
+                    marginTop: "50px",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    fontFamily: "Outfit",
+                  },
+                ]}
+              >
+                Platen Tonnage{" "}
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    fontFamily: "Outfit",
+                    color: "#FFFFFF",
+                  }}
+                >
+                  Chart{" "}
+                </Text>
+                <Text
+                  style={{
+                    marginTop: "50px",
+                    fontWeight: "bold",
+                    fontSize: "10px",
+                    fontFamily: "Outfit",
+                    color: "#86868B",
+                  }}
+                >
+                  (G3B)
+                </Text>
+              </Text>
               <Image src={chartImages["Platen Tonnage"]} />
             </View>
           )}
-
-          {chartImages?.["Shroud Vacuum"] && (
-            <View>
-              <Image src={chartImages["Shroud Vacuum"]} />
-            </View>
-          )}
-
-          {chartImages?.["Platen Referenced Position"] && (
-            <View>
-              <Image src={chartImages["Platen Referenced Position"]} />
-            </View>
-          )}
-
-          {chartImages?.["Tank Vacuum"] && (
-            <View>
-              <Image src={chartImages["Tank Vacuum"]} />
-            </View>
-          )}
         </View>
+      </Page>
+      <Page style={styles.pageBlack} size="A4" orientation="landscape">
+        {chartImages?.["Shroud Vacuum"] && (
+          <View style={{ marginTop: 120 }}>
+            <Text
+              style={[
+                styles.textOrangeOne,
+                {
+                  marginLeft: "50px",
+                  marginTop: "50px",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  fontFamily: "Outfit",
+                },
+              ]}
+            >
+              Shroud Vacuum{" "}
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  fontFamily: "Outfit",
+                  color: "#FFFFFF",
+                }}
+              >
+                Chart{" "}
+              </Text>
+              <Text
+                style={{
+                  marginTop: "50px",
+                  fontWeight: "bold",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  color: "#86868B",
+                }}
+              >
+                (G5D)
+              </Text>
+            </Text>
+            <Image src={chartImages["Shroud Vacuum"]} />
+          </View>
+        )}
+      </Page>
+      <Page style={styles.pageBlack} size="A4" orientation="landscape">
+        {chartImages?.["Platen Referenced Position"] && (
+          <View style={{ marginTop: 120 }}>
+            <Text
+              style={[
+                styles.textOrangeOne,
+                {
+                  marginLeft: "50px",
+                  marginTop: "50px",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  fontFamily: "Outfit",
+                },
+              ]}
+            >
+              Platen Referenced Position{" "}
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  fontFamily: "Outfit",
+                  color: "#FFFFFF",
+                }}
+              >
+                Chart{" "}
+              </Text>
+              <Text
+                style={{
+                  marginTop: "50px",
+                  fontWeight: "bold",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  color: "#86868B",
+                }}
+              >
+                (G5D)
+              </Text>
+            </Text>
+            <Image src={chartImages["Platen Referenced Position"]} />
+          </View>
+        )}
+      </Page>
+      <Page style={styles.pageBlack} size="A4" orientation="landscape">
+        {chartImages?.["Tank Vacuum"] && (
+          <View style={{ marginTop: 120 }}>
+            <Text
+              style={[
+                styles.textOrangeOne,
+                {
+                  marginLeft: "50px",
+                  marginTop: "50px",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  fontFamily: "Outfit",
+                },
+              ]}
+            >
+              Tank Vacuum{" "}
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  fontFamily: "Outfit",
+                  color: "#FFFFFF",
+                }}
+              >
+                Chart{" "}
+              </Text>
+              <Text
+                style={{
+                  marginTop: "50px",
+                  fontWeight: "bold",
+                  fontSize: "10px",
+                  fontFamily: "Outfit",
+                  color: "#86868B",
+                }}
+              >
+                (G5D)
+              </Text>
+            </Text>
+            <Image src={chartImages["Tank Vacuum"]} />
+          </View>
+        )}
       </Page>
       {/* Product Registration Page */}
       <Page style={styles.page} size="A4">

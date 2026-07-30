@@ -15,6 +15,7 @@ type CustomPayloadEntry = {
   color?: string;
   payload: NormalizedRow; // 👈 aquí decimos que payload es tu fila completa
   boxId: string;
+  chartName: string;
 };
 
 export const CustomTooltip: React.FC<
@@ -25,9 +26,10 @@ export const CustomTooltip: React.FC<
     min: number;
     prom: number;
     boxId: string;
+    chartName: string;
   }
 > = (props) => {
-  const { active, payload, label, max, boxId } = props;
+  const { active, payload, label, max, boxId, chartName } = props;
   const isMobile = useMediaQuery("(max-width: 900px)");
 
   if (active && payload && payload.length) {
@@ -45,7 +47,7 @@ export const CustomTooltip: React.FC<
           </div>
         </div>
 
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col p-2">
           <div className="w-full flex justify-between gap-6 pr-2">
             <div className="text-sm text-[#949A9C] ml-4">Box Id</div>
             <div className="text-sm text-[#949A9C]">Value</div>
@@ -59,7 +61,7 @@ export const CustomTooltip: React.FC<
                 {/* <div
                   className={`rounded-full w-3 h-3 ${entry.color === "#F31260" ? "bg-[#F31260]" : entry.color === "#17C964" ? "bg-[#17C964]" : entry.color === "#F5A524" ? "bg-[#F5A524]" : entry.color === "#FF56AD" ? "bg-[#FF56AD]" : "bg-[#006FEE]"}`}
                 ></div> */}
-                <p className="text-sm text-[#949A9C] ">
+                <p className="text-sm text-[#949A9C] font-bold">
                   {/* {entry.name} */} {boxId}
                 </p>
                 {!isMobile ? (
@@ -68,6 +70,15 @@ export const CustomTooltip: React.FC<
                     className="w-40"
                     value={entry.value}
                     maxValue={max}
+                    color={
+                      chartName === "Platen Tonnage"
+                        ? "accent"
+                        : chartName === "Shroud Vacuum"
+                          ? "danger"
+                          : chartName === "Platen Referenced Position"
+                            ? "success"
+                            : "warning"
+                    }
                   >
                     {/* <ProgressBar.Output /> */}
                     <ProgressBar.Track>
@@ -76,7 +87,19 @@ export const CustomTooltip: React.FC<
                   </ProgressBar>
                 ) : null}
 
-                <p className="text-white font-bold">{entry.value}</p>
+                <span className="text-white font-bold">
+                  {entry.value}{" "}
+                  <span className="text-[10px] mt-4">
+                    {" "}
+                    {chartName === "Platen Tonnage"
+                      ? "Tons"
+                      : chartName === "Shroud Vacuum"
+                        ? "inHg"
+                        : chartName === "Platen Referenced Position"
+                          ? "mm"
+                          : "inHg"}
+                  </span>
+                </span>
                 {/*  <p>{`${
                   entry.payload?.[`${entry.dataKey}_inicio`]
                     ? (
