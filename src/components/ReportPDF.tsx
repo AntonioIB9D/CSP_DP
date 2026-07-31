@@ -99,6 +99,71 @@ const styles = StyleSheet.create({
     objectFit: "contain",
     marginVertical: 15,
   },
+  /* --- ESTILOS DE LA TABLA --- */
+  tableContainer: {
+    marginTop: 60,
+    marginLeft: "40px",
+    marginRight: "20px",
+    width: "90%",
+    borderRadius: 4,
+    overflow: "hidden",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+  },
+  tableRow: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#E2E8F0",
+    minHeight: 28,
+    alignItems: "center",
+  },
+  tableHeaderRow: {
+    backgroundColor: "#3A404A", // Mismo azul de tu título
+    borderBottomWidth: 1,
+    borderBottomColor: "#3A404A",
+  },
+  tableRowEven: {
+    backgroundColor: "#F8FAFC", // Zebra striping para mejor lectura
+  },
+  tableRowOdd: {
+    backgroundColor: "#FFFFFF",
+  },
+
+  /* --- ANCHOS DE COLUMNAS --- */
+  colProcess: {
+    width: "20%",
+    paddingLeft: 10,
+    paddingRight: 5,
+  },
+  colProcessName: {
+    width: "45%",
+    paddingLeft: 10,
+    paddingRight: 5,
+  },
+  colDate: {
+    width: "18%",
+    textAlign: "center",
+    paddingHorizontal: 5,
+  },
+  colTime: {
+    width: "17%",
+    textAlign: "center",
+    paddingHorizontal: 5,
+  },
+
+  /* --- TEXTO --- */
+  headerText: {
+    fontFamily: "Outfit",
+    fontSize: 10,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+  },
+  cellText: {
+    fontFamily: "Outfit",
+    fontSize: 9,
+    color: "#334155",
+  },
 });
 
 type ReportPDFProps = {
@@ -214,6 +279,45 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
   const processFourData = data?.data?.find((step) => step?.proceso === 4);
   const processFiveData = data?.data?.find((step) => step?.proceso === 5);
   const processSixData = data?.data?.find((step) => step?.proceso === 6);
+
+  const processData = [
+    {
+      process: "1",
+      processName: "Drill Entrance",
+      date: processOneData?.time_stamp.split(" ")[0],
+      time: processOneData?.time_stamp.split(" ")[1],
+    },
+    {
+      process: "2",
+      processName: "Drill Exit",
+      date: processTwoData?.time_stamp.split(" ")[0],
+      time: processTwoData?.time_stamp.split(" ")[1],
+    },
+    {
+      process: "3",
+      processName: "Paint Entrance",
+      date: processThreeData?.time_stamp.split(" ")[0],
+      time: processThreeData?.time_stamp.split(" ")[1],
+    },
+    {
+      process: "4",
+      processName: "Paint Exit",
+      date: processFourData?.time_stamp.split(" ")[0],
+      time: processFourData?.time_stamp.split(" ")[1],
+    },
+    {
+      process: "5",
+      processName: "Assembly",
+      date: processFiveData?.time_stamp.split(" ")[0],
+      time: processFiveData?.time_stamp.split(" ")[1],
+    },
+    {
+      process: "6",
+      processName: "Shipping Tape",
+      date: processSixData?.time_stamp.split(" ")[0],
+      time: processSixData?.time_stamp.split(" ")[1],
+    },
+  ];
 
   const arraysld = { ldSideA, ldSideB, ldSideC, ldSideD };
   const arrayssd = { sdSideA, sdSideB, sdSideC, sdSideD };
@@ -837,7 +941,7 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
         )}
       </Page>
       {/* Product Registration Page */}
-      <Page style={styles.page} size="A4">
+      <Page style={styles.page} size="A4" orientation="landscape">
         <View>
           <Text
             style={[
@@ -865,18 +969,61 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
             Recording of product hours in the process
           </Text>
         </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            padding: "16px",
-            flexWrap: "wrap",
-            gap: "16px",
-          }}
-        >
-          {/* Process 1 */}
-          <View
+
+        {/* --- INICIO DE LA TABLA --- */}
+        <View style={styles.tableContainer}>
+          {/* Encabezados de la Tabla */}
+          <View style={[styles.tableRow, styles.tableHeaderRow]}>
+            <View style={styles.colProcess}>
+              <Text style={styles.headerText}>Process</Text>
+            </View>
+            <View style={styles.colProcessName}>
+              <Text style={styles.headerText}>Process Name</Text>
+            </View>
+            <View style={styles.colDate}>
+              <Text style={styles.headerText}>Date</Text>
+            </View>
+            <View style={styles.colTime}>
+              <Text style={styles.headerText}>Time</Text>
+            </View>
+          </View>
+
+          {/* Cuerpos / Filas (6 Filas) */}
+          {processData.map((row, index) => (
+            <View
+              key={index}
+              style={[
+                styles.tableRow,
+                index % 2 === 0 ? styles.tableRowOdd : styles.tableRowEven,
+                // Elimina el borde inferior en la última fila para que encaje limpio con el contenedor
+                index === processData.length - 1
+                  ? { borderBottomWidth: 0 }
+                  : {},
+              ]}
+            >
+              <View style={styles.colProcess}>
+                <Text style={styles.cellText}>{row.process}</Text>
+              </View>
+              <View style={styles.colProcessName}>
+                <Text style={styles.cellText}>{row.processName}</Text>
+              </View>
+              <View style={styles.colDate}>
+                <Text style={styles.cellText}>
+                  {row.date ? row.date : "Not available"}
+                </Text>
+              </View>
+              <View style={styles.colTime}>
+                <Text style={styles.cellText}>
+                  {row.time ? row.time : " Not available"}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </View>
+        {/* --- FIN DE LA TABLA --- */}
+
+        {/* Process 1 */}
+        {/*  <View
             style={[
               styles.grayLightContainer,
               {
@@ -969,12 +1116,12 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
                   {processOneData?.time_stamp.split(" ")[1]}{" "}
                 </Text>
               </Text>
-            </View>
+            </View> */}
 
-            {/*  <Text style={{ color: "#FFFFFF" }}>Date: {}</Text> */}
-          </View>
-          {/* Process 2 */}
-          <View
+        {/*  <Text style={{ color: "#FFFFFF" }}>Date: {}</Text> */}
+        {/*  </View> */}
+        {/* Process 2 */}
+        {/* <View
             style={[
               styles.grayLightContainer,
               {
@@ -1072,9 +1219,9 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
                 </Text>
               </Text>
             </View>
-          </View>
-          {/* Process 3 */}
-          <View
+          </View> */}
+        {/* Process 3 */}
+        {/* <View
             style={[
               styles.grayLightContainer,
               {
@@ -1171,9 +1318,9 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
                 </Text>
               </Text>
             </View>
-          </View>
-          {/* Process 4 */}
-          <View
+          </View> */}
+        {/* Process 4 */}
+        {/* <View
             style={[
               styles.grayLightContainer,
               {
@@ -1270,9 +1417,9 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
                 </Text>
               </Text>
             </View>
-          </View>
-          {/* Process 5 */}
-          <View
+          </View> */}
+        {/* Process 5 */}
+        {/* <View
             style={[
               styles.grayLightContainer,
               {
@@ -1369,9 +1516,9 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
                 </Text>
               </Text>
             </View>
-          </View>
-          {/* Process 6 */}
-          <View
+          </View> */}
+        {/* Process 6 */}
+        {/* <View
             style={[
               styles.grayLightContainer,
               {
@@ -1468,8 +1615,7 @@ export default function ReportPDF({ data, chartImages }: ReportPDFProps) {
                 </Text>
               </Text>
             </View>
-          </View>
-        </View>
+          </View> */}
       </Page>
       {/* Defects Page */}
       <Page style={styles.page} size="A4">

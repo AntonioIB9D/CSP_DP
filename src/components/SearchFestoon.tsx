@@ -3,7 +3,6 @@ import { Time, type DateValue } from "@internationalized/date";
 import { useState } from "react";
 import { fetchFestoonByHour } from "../services/TagsProService";
 import { useQuery } from "@tanstack/react-query";
-import ProcessRegister from "../pages/ProcessRegister";
 import type { TagsData } from "../schemas/tagsPro.schema";
 
 type SearchFestoonPropos = {
@@ -11,10 +10,7 @@ type SearchFestoonPropos = {
   tagsProData: TagsData | null | undefined;
 };
 
-export default function SearchFestoon({
-  boxId,
-  tagsProData,
-}: SearchFestoonPropos) {
+export default function SearchFestoon({ boxId }: SearchFestoonPropos) {
   const pressNumberCut = boxId?.charAt(0) || "-";
   const pressNumber =
     pressNumberCut === "1"
